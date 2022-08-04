@@ -37,25 +37,34 @@ const obj = {
 
 // regex
 // if not a number else
-buttons.forEach(button => {
-    button.addEventListener('click', event => {
-        switch (event.target.innerText) {
-            case 'clear':
-                display.innerText = '';
-                break;
-            case '+':
-                break;
-            case '-':
-                break;
-            case '*':
-                break;
-            case '/':
-                break;
-            case '=':
-                break;
-            default:
-                display.innerText += event.target.innerText;
-                break;
-        }
-    });
+
+// todo: create function to handle keydown and button click
+
+keypad.addEventListener('pointerdown', event => {
+    let elem = event.target;
+
+    // if (elem.textContent.length > 1) return;
+    if (elem.tagName != 'BUTTON') return;
+
+    switch (elem.innerText) {
+        case 'clear':
+            display.innerText = '';
+            // might clear results obj
+            break;
+        case '+':
+            // store the numbers entered until this point
+            break;
+        case '-':
+            break;
+        case '*':
+            break;
+        case '/':
+            break;
+        case '=':
+            // or just send the whole thing and parse it lol
+            break;
+        default:
+            display.innerText += elem.innerText;
+            break;
+    }
 });
