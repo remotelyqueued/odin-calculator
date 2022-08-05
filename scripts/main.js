@@ -30,10 +30,20 @@ const display = document.getElementById('display');
 const keypad = document.getElementById('keypad');
 const buttons = document.querySelectorAll('button');
 
-const obj = {
+let obj = {
     x: 0,
     y: 0,
 };
+
+function equation(string) {
+    let split = string.split('');
+    // deal with whitespace
+
+    const re = /\d/;
+
+}
+
+equation('2 + 2');
 
 // regex
 // if not a number else
@@ -46,10 +56,18 @@ keypad.addEventListener('pointerdown', event => {
     // if (elem.textContent.length > 1) return;
     if (elem.tagName != 'BUTTON') return;
 
+    if (elem.innerText === '=') {
+        // send string
+    } else if (elem.innerText === 'clear') {
+        display.innerText = '';
+    }
     switch (elem.innerText) {
         case 'clear':
             display.innerText = '';
-            // might clear results obj
+            obj = {
+                x: 0,
+                y: 0,
+            };
             break;
         case '+':
             // store the numbers entered until this point
