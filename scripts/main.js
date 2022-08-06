@@ -1,11 +1,10 @@
 // main.js
-
 const display = document.getElementById('display');
 const keypad = document.getElementById('keypad');
 const buttons = document.querySelectorAll('button');
 
 class Result {
-    letructor() {
+    constructor() {
         this.num1 = '';
         this.num2 = '';
         this.result = 0;
@@ -13,16 +12,6 @@ class Result {
         this.operator = '';
     }
 }
-
-function equation(string) {
-    let split = string.split('');
-    // deal with whitespace
-
-    const re = /\d/;
-
-}
-
-equation('2 + 2');
 
 let obj = new Result();
 let array = [];
@@ -93,7 +82,6 @@ keypad.addEventListener('pointerdown', event => {
     console.log(array);
     console.log(obj);
 });
->>>>>>> 5f2a95ac44cf2aac04c7bb471e34262fc304580a
 
 // todo:
 document.body.onkeydown = function (event) {};
