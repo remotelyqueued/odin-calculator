@@ -1,60 +1,43 @@
 // main.js
-const display = document.getElementById('display');
+
+import { History } from './history.js';
+import * as math from './math.js';
+
 const keypad = document.getElementById('keypad');
-const buttons = document.querySelectorAll('button');
 
-class Result {
-    constructor() {
-        this.num1 = '';
-        this.num2 = '';
-        this.result = 0;
-        this.operand = 'num1';
-        this.operator = '';
-    }
-}
-
-let obj = new Result();
+let obj = new History();
 let array = [];
 
 function operate(operator, num1, num2) {
-    let result;
     switch (operator) {
         case 'add':
-            result = add(num1, num2);
-            break;
+            return math.add(num1, num2);
         case 'subtract':
-            result = subtract(num1, num2);
-            break;
+            return math.subtract(num1, num2);
         case 'multiply':
-            result = multiply(num1, num2);
-            break;
+            return math.multiply(num1, num2);
         case 'divide':
-            result = divide(num1, num2);
-            break;
+            return math.divide(num1, num2);
         default:
-            console.log('Oops');
-            break;
+            return 'Oops';
     }
-    return result;
 }
 
 keypad.addEventListener('pointerdown', event => {
+    // event delegation
     let input = event.target;
-
     if (input.tagName != 'BUTTON') return;
 
+    // determine if its an operation or a number
     const operation = event.target.id;
     input = input.innerText;
 
-    // todo: if obj.operand == num2 push?
     if (!operation) {
         obj[obj.operand] += input;
-        display.innerText += input;
     } else {
         switch (operation) {
             case 'clear':
-                obj = new Result();
-                display.innerText = '0';
+                obj = new History();
                 break;
             case 'add':
             case 'subtract':
@@ -62,43 +45,40 @@ keypad.addEventListener('pointerdown', event => {
             case 'divide':
                 obj.operand = 'num2';
                 obj.operator = operation;
-                display.innerText += input;
                 break;
             case 'equals':
                 obj.result = operate(
                     obj.operator,
-                    Number(obj.num1),
-                    Number(obj.num2)
+                    parseFloat(obj.num1),
+                    parseFloat(obj.num2)
                 );
-                display.innerText += input + obj.result;
+                updateDisplay();
                 array.push(obj);
-                obj = new Result();
+                obj = new History();
                 break;
-            case 'invert': // multiply obj.num by -1
-            case 'decimal': // insert decimal into obj.num
-            case 'back': // remove from obj.num
+            case 'invert':
+                obj[obj.operand] = operate(
+                    'multiply',
+                    parseFloat(obj[obj.operand]),
+                    -1
+                ).toString();
+                break;
+            case 'decimal':
+                if (!obj.isFloat) {
+                    obj[obj.operand] += '.';
+                    obj.isFloat = true;
+                }
+            case 'back':
+                obj.removeLastDigit();
         }
     }
-    console.log(array);
-    console.log(obj);
+    // console.log(array);
+    // console.log(obj);
+    updateDisplay();
 });
 
 // todo:
+function updateDisplay() {
+    console.log(obj.toString());
+}
 document.body.onkeydown = function (event) {};
-
-// math functions
-function add(x, y) {
-    return x + y;
-}
-
-function subtract(x, y) {
-    return x - y;
-}
-
-function multiply(x, y) {
-    return x * y;
-}
-
-function divide(x, y) {
-    return x / y;
-}
