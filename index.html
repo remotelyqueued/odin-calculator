@@ -20,32 +20,38 @@
     </head>
     <body>
         <header>
-            <h1>Calculator</h1>
+            <h1>calculator</h1>
         </header>
         <main>
-            <section>
-                <div id="display">9839485394</div>
-            </section>
-            <section id="keypad">
-                <button>clear</button>
-                <button>+</button>
-                <button>-</button>
-                <button>*</button>
-                <button>/</button>
+            <div id="history"></div>
+            <div id="display"></div>
 
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>0</button>
+            <div id="keypad">
+                <div id="operators">
+                    <button type="button" id="clear">C</button>
+                    <button type="button" id="add">+</button>
+                    <button type="button" id="subtract">-</button>
+                    <button type="button" id="multiply">*</button>
+                    <button type="button" id="divide">/</button>
+                    <button type="button" id="equals">=</button>
+                    <button type="button" id="invert">+/-</button>
+                    <button type="button" id="decimal">.</button>
+                    <button type="button" id="back">back</button>
+                </div>
 
-                <button>=</button>
-            <section/>
+                <div id="operands">
+                    <button type="button">1</button>
+                    <button type="button">2</button>
+                    <button type="button">3</button>
+                    <button type="button">4</button>
+                    <button type="button">5</button>
+                    <button type="button">6</button>
+                    <button type="button">7</button>
+                    <button type="button">8</button>
+                    <button type="button">9</button>
+                    <button type="button">0</button>
+                </div>
+            </div>
         </main>
         <footer></footer>
     </body>

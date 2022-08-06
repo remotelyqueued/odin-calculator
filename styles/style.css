@@ -1,1 +1,16 @@
 /* style.css */
+
+body {
+    display: flex;
+    flex-flow: column wrap;
+
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    display: grid;
+    /* grid-template-columns: repeat(4, 1fr); */
+    grid-template-rows: repeat(auto, 1fr);
+}
