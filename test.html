@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="calculator" />
+
+        <link rel="stylesheet" href="./styles/style.css" />
+
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>"
+        />
+        <!-- 
+            🕶 🍔 👻 🤯 🙅 🤣 😭 👍
+        -->
+        <title>calculator</title>
+    </head>
+    <body>
+        <header>
+            <h1>calculator</h1>
+        </header>
+        <main>
+            <div id="history"></div>
+            <div id="display"></div>
+
+            <div id="keypad">
+                <button type="button" data-action="clear">C</button>
+                <button type="button" data-action="add">+</button>
+                <button type="button" data-action="subtract">-</button>
+                <button type="button" data-action="multiply">*</button>
+                <button type="button" data-action="divide">/</button>
+                <button type="button" data-action="equals">=</button>
+                <button type="button" data-action="invert">+/-</button>
+                <button type="button" data-action="decimal">.</button>
+                <button type="button" data-action="back">back</button>
+
+                <button type="button" data-action="number">1</button>
+                <button type="button" data-action="number">2</button>
+                <button type="button" data-action="number">3</button>
+                <button type="button" data-action="number">4</button>
+                <button type="button" data-action="number">5</button>
+                <button type="button" data-action="number">6</button>
+                <button type="button" data-action="number">7</button>
+                <button type="button" data-action="number">8</button>
+                <button type="button" data-action="number">9</button>
+                <button type="button" data-action="number">0</button>
+            </div>
+        </main>
+        <footer></footer>
+
+        <script>
+            class Calculator {
+                constructor(elem) {
+                    this._elem = elem;
+                    elem.onclick = this.onClick.bind(this);
+
+                    this.operator = '';
+                    this.operand = '';
+                    this.result = '';
+                }
+                clear() {
+                    console.log('clearing');
+                    this.operator = '';
+                    this.operand = '';
+                    this.result = '';
+                }
+                add() {
+                    if (!this.operator) {
+                        console.log('adding');
+                        this.result = this.operand;
+                        this.operand = '';
+                        this.operator = 'add';
+                        console.log(this);
+                    } else {
+                        this.result = `${
+                            parseFloat(this.operand) + parseFloat(this.result)
+                        }`;
+                        this.operand = '';
+                        this.operator = '';
+                        console.log(this);
+                    }
+                }
+                subtract() {
+                    if (!this.operator) {
+                        console.log('subtracting');
+                        this.result = this.operand;
+                        this.operand = '';
+                        this.operator = 'subtract';
+                        console.log(this);
+                    } else {
+                        this.result = `${operate(
+                            this.operator,
+                            parseFloat(this.result),
+                            parseFloat(this.operand)
+                        )}`;
+                        this.operand = '';
+                        this.operator = '';
+                        console.log(this);
+                    }
+                }
+                multiply() {
+                    if (!this.operator) {
+                        console.log('multiplying');
+                        this.result = this.operand;
+                        this.operand = '';
+                        this.operator = 'multiply';
+                        console.log(this);
+                    } else {
+                        this.result = `${
+                            parseFloat(this.operand) + parseFloat(this.result)
+                        }`;
+                        this.operand = '';
+                        this.operator = '';
+                        console.log(this);
+                    }
+                }
+                divide() {
+                    if (!this.operator) {
+                        console.log('dividing');
+                        this.result = this.operand;
+                        this.operand = '';
+                        this.operator = 'divide';
+                        console.log(this);
+                    }
+                }
+
+                equals() {
+                    console.log('equaling');
+                }
+                invert() {
+                    console.log('inverting');
+                    this.operand = `${parseFloat(this.operand) * -1}`;
+                    console.log(this);
+                }
+                decimal() {
+                    console.log('decimaling');
+                }
+                back() {
+                    console.log('backing');
+                }
+                number(event) {
+                    console.log('numbering');
+                    this.operand += event.target.innerText;
+                    console.log(this);
+                }
+
+                onClick(event) {
+                    let action = event.target.dataset.action;
+                    if (action) {
+                        this[action](event);
+                    }
+                }
+
+                print() {
+                    this.toString();
+                }
+
+                toString() {
+                    return `${this.operator} ${this.operand} ${this.result}`;
+                }
+            }
+
+            new Calculator(keypad);
+
+            function operate(operator, num1, num2) {
+                switch (operator) {
+                    case 'add':
+                        return add(num1, num2);
+                    case 'subtract':
+                        return subtract(num1, num2);
+                    case 'multiply':
+                        return multiply(num1, num2);
+                    case 'divide':
+                        return divide(num1, num2);
+                    default:
+                        return 'Oops';
+                }
+            }
+
+            function add(x, y) {
+                return x + y;
+            }
+
+            function subtract(x, y) {
+                return x - y;
+            }
+
+            function multiply(x, y) {
+                return x * y;
+            }
+
+            function divide(x, y) {
+                return x / y;
+            }
+        </script>
+    </body>
+</html>
