@@ -52,98 +52,116 @@
 
         <script>
             class Calculator {
-                constructor(elem) {
-                    this._elem = elem;
-                    elem.onclick = this.onClick.bind(this);
+                #elem;
+                _operator = '';
+                _operand = '';
+                _result = '';
+                _isFloat = false;
 
-                    this.operator = '';
-                    this.operand = '';
-                    this.result = '';
-                }
-                clear() {
-                    console.log('clearing');
-                    this.operator = '';
-                    this.operand = '';
-                    this.result = '';
+                constructor(elem) {
+                    this.#elem = elem;
+                    elem.onclick = this.onClick.bind(this);
                 }
                 add() {
-                    if (!this.operator) {
-                        console.log('adding');
-                        this.result = this.operand;
-                        this.operand = '';
-                        this.operator = 'add';
-                        console.log(this);
-                    } else {
-                        this.result = `${
-                            parseFloat(this.operand) + parseFloat(this.result)
-                        }`;
-                        this.operand = '';
-                        this.operator = '';
-                        console.log(this);
-                    }
+                    this._calculate('add');
                 }
                 subtract() {
-                    if (!this.operator) {
-                        console.log('subtracting');
-                        this.result = this.operand;
-                        this.operand = '';
-                        this.operator = 'subtract';
-                        console.log(this);
-                    } else {
-                        this.result = `${operate(
-                            this.operator,
-                            parseFloat(this.result),
-                            parseFloat(this.operand)
-                        )}`;
-                        this.operand = '';
-                        this.operator = '';
-                        console.log(this);
-                    }
+                    this._calculate('subtract');
                 }
                 multiply() {
-                    if (!this.operator) {
-                        console.log('multiplying');
-                        this.result = this.operand;
-                        this.operand = '';
-                        this.operator = 'multiply';
-                        console.log(this);
-                    } else {
-                        this.result = `${
-                            parseFloat(this.operand) + parseFloat(this.result)
-                        }`;
-                        this.operand = '';
-                        this.operator = '';
-                        console.log(this);
-                    }
+                    this._calculate('multiply');
                 }
                 divide() {
-                    if (!this.operator) {
-                        console.log('dividing');
-                        this.result = this.operand;
-                        this.operand = '';
-                        this.operator = 'divide';
-                        console.log(this);
+                    this._calculate('divide');
+                }
+
+                // are true
+                // operation && operand && result
+                // operation && result
+                // operation && operand
+
+                // todo: fix logic
+                _calculate(operation) {
+                    if (!operation) {
+                        console.log('no operation. fail');
+                        return;
+                    } else if (!this._operand && !this._result) {
+                        console.log('no operand and no result. double fail');
+                        return;
+                    }
+
+                    this._operator = operation;
+
+                    if (this._operand && this._result) {
+                        this._result = `${operate(
+                            this._operator,
+                            parseFloat(this._result),
+                            parseFloat(this._operand)
+                        )}`;
+                        this._operand = '';
+                        this._isFloat = false;
+                    } else if (this._operand) {
+                        this._result = this._operand;
+                        this._operand = '';
+                        this._isFloat = false;
+                    } else if (this._result) {
+                        // ... just change operator
+                    }
+
+                    
+                    console.log(this.toString());
+
+                    if (!isFinite(this._result)) {
+                        console.log('lmao');
+                        this.clear();
+                    }
+                }
+                equals() {
+                    this._calculate(this._operator);
+                }
+                clear() {
+                    this._operator = '';
+                    this._operand = '';
+                    this._result = '';
+                    this._isFloat = false;
+                    console.log('cleared');
+                }
+                invert() {
+                    if (!this._operand) {
+                        console.log('so much failing');
+                    } else {
+                        this._operand = `${operate(
+                            'multiply',
+                            parseFloat(this._operand),
+                            -1
+                        )}`;
+                    }
+                }
+                decimal() {
+                    if (this._isFloat) {
+                        console.log('failing');
+                    } else if (!this._operand) {
+                        console.log('more failing');
+                    } else {
+                        this._operand += '.';
+                        this._isFloat = true;
+                    }
+                }
+                back() {
+                    if (!this._operand) {
+                        console.log('u are failur');
+                    } else {
+                        this._operand = this._operand.slice(0, -1);
                     }
                 }
 
-                equals() {
-                    console.log('equaling');
-                }
-                invert() {
-                    console.log('inverting');
-                    this.operand = `${parseFloat(this.operand) * -1}`;
-                    console.log(this);
-                }
-                decimal() {
-                    console.log('decimaling');
-                }
-                back() {
-                    console.log('backing');
-                }
                 number(event) {
-                    console.log('numbering');
-                    this.operand += event.target.innerText;
-                    console.log(this);
+                    if (this._operand.length > 10) {
+                        console.log('OOps');
+                    } else {
+                        this._operand += event.target.innerText;
+                        console.log(this._operand);
+                    }
                 }
 
                 onClick(event) {
@@ -153,12 +171,8 @@
                     }
                 }
 
-                print() {
-                    this.toString();
-                }
-
                 toString() {
-                    return `${this.operator} ${this.operand} ${this.result}`;
+                    return `${this._operand} ${this._operator} ${this._result}`;
                 }
             }
 
