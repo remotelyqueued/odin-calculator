@@ -148,9 +148,10 @@
                     }
                 }
 
-                // todo: floating point math
                 decimal() {
                     if (this.isFloat) {
+                        return;
+                    } else if (!this.operator && !this.operand) {
                         return;
                     } else {
                         this.operand += '.';
@@ -162,7 +163,7 @@
                 back() {
                     if (this.operand) {
                         this.operand = this.operand.slice(0, -1);
-                        if (this.operand.length == 0) {
+                        if (this.operand.search('.') < 1) {
                             this.isFloat = false;
                         }
                     } else if (this.operator) {
@@ -186,33 +187,44 @@
                     }
                 }
 
-                // todo: result on screen - start entering decimal it
-                // appears but does not effect correctness
                 updateDisplay() {
-                    console.log(this);
-                    if (!this.result) {
-                        this.display.innerText = `${this.operand}`;
-                    } else if (!this.operator) {
-                        if (this.result && this.operand) {
-                            this.display.innerText = `${this.operand}`;
-                        } else {
-                            this.display.innerText = `${this.result}`;
-                        }
-                    } else {
-                        // if (this.isFloat) {
-                        //     this.display.innerText = `${this.operand}`;
-                        // } else {
+                    // works
+                    // if (this.operator && this.operand && !this.result) {
+                    //     this.display.innerText = `${
+                    //         this.operand + this.operatorToSymbol()
+                    //     }`;
+                    // } else if (!this.operator && !this.operand && this.result) {
+                    //     this.display.innerText = `${this.result}`;
+                    // } else if (!this.operator && this.operand) {
+                    //     // no operator and an operand (result true or false)
+                    //     this.display.innerText = `${this.operand}`;
+                    // } else {
+                    //     // all false or all true
+                    //     this.display.innerText = `${
+                    //         this.result + this.operatorToSymbol() + this.operand
+                    //     }`;
+                    // }
 
+                    // special case otherwise just display the string
+                    if (this.operator && this.operand && !this.result) {
                         this.display.innerText = `${
-                            this.result + this.operatorToSymbol() + this.operand
+                            this.operand + this.operatorToSymbol()
                         }`;
-                        // }
+                    } else {
+                        // all false or all true
+                        this.display.innerText = this.toString();
                     }
                 }
 
                 // todo:
                 updateHistory() {}
                 onKeyDown() {}
+
+                toString() {
+                    return `${
+                        this.result + this.operatorToSymbol() + this.operand
+                    }`;
+                }
 
                 operatorToSymbol() {
                     switch (this.operator) {
