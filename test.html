@@ -19,7 +19,7 @@
     </head>
     <body>
         <header>
-            <h1>calculator</h1>
+            <h1>calcu now</h1>
         </header>
         <main>
             <div id="history"></div>
@@ -27,25 +27,29 @@
 
             <div id="keypad">
                 <button type="button" data-action="clear">C</button>
-                <button type="button" data-action="add">+</button>
-                <button type="button" data-action="subtract">-</button>
-                <button type="button" data-action="multiply">*</button>
                 <button type="button" data-action="divide">/</button>
-                <button type="button" data-action="equals">=</button>
                 <button type="button" data-action="invert">+/-</button>
-                <button type="button" data-action="decimal">.</button>
-                <button type="button" data-action="back">back</button>
+                
+
+                <button type="button" data-action="number">7</button>
+                <button type="button" data-action="number">8</button>
+                <button type="button" data-action="number">9</button>
+                <button type="button" data-action="multiply">*</button>
+
+                <button type="button" data-action="number">4</button>
+                <button type="button" data-action="number">5</button>
+                <button type="button" data-action="number">6</button>
+                <button type="button" data-action="subtract">-</button>
 
                 <button type="button" data-action="number">1</button>
                 <button type="button" data-action="number">2</button>
                 <button type="button" data-action="number">3</button>
-                <button type="button" data-action="number">4</button>
-                <button type="button" data-action="number">5</button>
-                <button type="button" data-action="number">6</button>
-                <button type="button" data-action="number">7</button>
-                <button type="button" data-action="number">8</button>
-                <button type="button" data-action="number">9</button>
+                <button type="button" data-action="add">+</button>
+
                 <button type="button" data-action="number">0</button>
+                <button type="button" data-action="decimal">.</button>
+                <button type="button" data-action="back">←</button>
+                <button type="button" data-action="equals">=</button>
             </div>
         </main>
         <footer></footer>
@@ -57,6 +61,7 @@
                 _operand = '';
                 _result = '';
                 _isFloat = false;
+                _display = document.getElementById('display');
 
                 constructor(elem) {
                     this.#elem = elem;
@@ -104,21 +109,25 @@
                         this._result = this._operand;
                         this._operand = '';
                         this._isFloat = false;
-                    } else if (this._result) {
-                        // ... just change operator
                     }
 
-                    
+                    // else if (this._result) {
+                    //     // ... just change operator
+                    // }
+
                     console.log(this.toString());
 
                     if (!isFinite(this._result)) {
-                        console.log('lmao');
+                        console.log('lmao. shit went wrong');
+                        console.log(this._result);
                         this.clear();
                     }
                 }
+
                 equals() {
                     this._calculate(this._operator);
                 }
+
                 clear() {
                     this._operator = '';
                     this._operand = '';
@@ -126,9 +135,10 @@
                     this._isFloat = false;
                     console.log('cleared');
                 }
+
                 invert() {
                     if (!this._operand) {
-                        console.log('so much failing');
+                        console.log('invert - so much failing');
                     } else {
                         this._operand = `${operate(
                             'multiply',
@@ -137,42 +147,69 @@
                         )}`;
                     }
                 }
+
                 decimal() {
                     if (this._isFloat) {
-                        console.log('failing');
+                        console.log('decimal - failing');
                     } else if (!this._operand) {
-                        console.log('more failing');
+                        console.log('decimal - more failing');
                     } else {
                         this._operand += '.';
                         this._isFloat = true;
                     }
                 }
+
                 back() {
                     if (!this._operand) {
-                        console.log('u are failur');
+                        console.log('back - u are failur');
                     } else {
                         this._operand = this._operand.slice(0, -1);
                     }
                 }
 
                 number(event) {
-                    if (this._operand.length > 10) {
-                        console.log('OOps');
-                    } else {
-                        this._operand += event.target.innerText;
-                        console.log(this._operand);
-                    }
+                    this._operand += event.target.innerText;
+                    console.log(this._operand);
                 }
 
                 onClick(event) {
                     let action = event.target.dataset.action;
                     if (action) {
                         this[action](event);
+                        this.updateDisplay();
                     }
                 }
 
-                toString() {
-                    return `${this._operand} ${this._operator} ${this._result}`;
+                updateDisplay() {
+                    if (!this._operator) {
+                        this._display.innerText = `${this._operand}`;
+                    } else if (!this._operand) {
+                        this._display.innerText = `${this._result}`;
+                    } else {
+                        this._display.innerText = `${
+                            this._result +
+                            this.operatorToSymbol() +
+                            this._operand
+                        }`;
+                    }
+                }
+
+                // todo:
+                updateHistory() {}
+
+                operatorToSymbol() {
+                    switch (this._operator) {
+                        case 'add':
+                            return '+';
+                        case 'subtract':
+                            return '-';
+                        case 'multiply':
+                            return '*';
+                        case 'divide':
+                            return '/';
+                        default:
+                            return '';
+                    }
                 }
             }
 
