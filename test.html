@@ -26,10 +26,10 @@
             <div id="display"></div>
 
             <div id="keypad">
-                <button type="button" data-action="clear">C</button>
+                <button type="button" data-action="clear">AC</button>
                 <button type="button" data-action="divide">/</button>
                 <button type="button" data-action="invert">+/-</button>
-                
+                <button type="button" data-action="back">←</button>
 
                 <button type="button" data-action="number">7</button>
                 <button type="button" data-action="number">8</button>
@@ -48,7 +48,7 @@
 
                 <button type="button" data-action="number">0</button>
                 <button type="button" data-action="decimal">.</button>
-                <button type="button" data-action="back">←</button>
+
                 <button type="button" data-action="equals">=</button>
             </div>
         </main>
@@ -57,121 +57,127 @@
         <script>
             class Calculator {
                 #elem;
-                _operator = '';
-                _operand = '';
-                _result = '';
-                _isFloat = false;
-                _display = document.getElementById('display');
+
+                operator = '';
+                operand = '';
+                result = '';
+
+                isFloat = false;
+
+                display = document.getElementById('display');
 
                 constructor(elem) {
                     this.#elem = elem;
                     elem.onclick = this.onClick.bind(this);
                 }
                 add() {
-                    this._calculate('add');
+                    this.calculate('add');
                 }
                 subtract() {
-                    this._calculate('subtract');
+                    this.calculate('subtract');
                 }
                 multiply() {
-                    this._calculate('multiply');
+                    this.calculate('multiply');
                 }
                 divide() {
-                    this._calculate('divide');
+                    this.calculate('divide');
                 }
 
-                // are true
-                // operation && operand && result
-                // operation && result
-                // operation && operand
-
-                // todo: fix logic
-                _calculate(operation) {
+                //
+                calculate(operation) {
                     if (!operation) {
                         console.log('no operation. fail');
                         return;
-                    } else if (!this._operand && !this._result) {
+                    } else if (!this.operand && !this.result) {
                         console.log('no operand and no result. double fail');
                         return;
                     }
 
-                    this._operator = operation;
+                    this.operator = operation;
 
-                    if (this._operand && this._result) {
-                        this._result = `${operate(
-                            this._operator,
-                            parseFloat(this._result),
-                            parseFloat(this._operand)
+                    if (this.operand && this.result) {
+                        this.result = `${operate(
+                            this.operator,
+                            parseFloat(this.result),
+                            parseFloat(this.operand)
                         )}`;
-                        this._operand = '';
-                        this._isFloat = false;
-                    } else if (this._operand) {
-                        this._result = this._operand;
-                        this._operand = '';
-                        this._isFloat = false;
+                        this.operand = '';
+                        // this.operator = '';
+                        this.isFloat = false;
+                    } else if (this.operand) {
+                        this.result = this.operand;
+                        this.operand = '';
+                        this.isFloat = false;
                     }
 
-                    // else if (this._result) {
-                    //     // ... just change operator
-                    // }
-
-                    console.log(this.toString());
-
-                    if (!isFinite(this._result)) {
+                    if (!isFinite(this.result)) {
                         console.log('lmao. shit went wrong');
-                        console.log(this._result);
+                        console.log(this.result);
                         this.clear();
                     }
                 }
 
                 equals() {
-                    this._calculate(this._operator);
+                    this.calculate(this.operator);
+                    this.operator = ''; // keep pressing equals need for display
                 }
 
                 clear() {
-                    this._operator = '';
-                    this._operand = '';
-                    this._result = '';
-                    this._isFloat = false;
+                    this.operator = '';
+                    this.operand = '';
+                    this.result = '';
+                    this.isFloat = false;
                     console.log('cleared');
                 }
 
                 invert() {
-                    if (!this._operand) {
-                        console.log('invert - so much failing');
-                    } else {
-                        this._operand = `${operate(
+                    if (!this.operand && this.result) {
+                        this.result = `${operate(
                             'multiply',
-                            parseFloat(this._operand),
+                            parseFloat(this.result),
+                            -1
+                        )}`;
+                    } else if (!this.operand && !this.result) {
+                        return;
+                    } else {
+                        this.operand = `${operate(
+                            'multiply',
+                            parseFloat(this.operand),
                             -1
                         )}`;
                     }
                 }
 
+                // todo: floating point math
                 decimal() {
-                    if (this._isFloat) {
-                        console.log('decimal - failing');
-                    } else if (!this._operand) {
-                        console.log('decimal - more failing');
+                    if (this.isFloat) {
+                        return;
                     } else {
-                        this._operand += '.';
-                        this._isFloat = true;
+                        this.operand += '.';
+                        this.isFloat = true;
                     }
                 }
 
+                // ✔️
                 back() {
-                    if (!this._operand) {
-                        console.log('back - u are failur');
+                    if (this.operand) {
+                        this.operand = this.operand.slice(0, -1);
+                        if (this.operand.length == 0) {
+                            this.isFloat = false;
+                        }
+                    } else if (this.operator) {
+                        this.operator = '';
                     } else {
-                        this._operand = this._operand.slice(0, -1);
+                        this.result = this.result.slice(0, -1);
                     }
                 }
 
+                // ✔️
                 number(event) {
-                    this._operand += event.target.innerText;
-                    console.log(this._operand);
+                    this.operand += event.target.innerText;
                 }
 
+                // ✔️
                 onClick(event) {
                     let action = event.target.dataset.action;
                     if (action) {
@@ -180,25 +186,36 @@
                     }
                 }
 
+                // todo: result on screen - start entering decimal it
+                // appears but does not effect correctness
                 updateDisplay() {
-                    if (!this._operator) {
-                        this._display.innerText = `${this._operand}`;
-                    } else if (!this._operand) {
-                        this._display.innerText = `${this._result}`;
+                    console.log(this);
+                    if (!this.result) {
+                        this.display.innerText = `${this.operand}`;
+                    } else if (!this.operator) {
+                        if (this.result && this.operand) {
+                            this.display.innerText = `${this.operand}`;
+                        } else {
+                            this.display.innerText = `${this.result}`;
+                        }
                     } else {
-                        this._display.innerText = `${
-                            this._result +
-                            this.operatorToSymbol() +
-                            this._operand
+                        // if (this.isFloat) {
+                        //     this.display.innerText = `${this.operand}`;
+                        // } else {
+
+                        this.display.innerText = `${
+                            this.result + this.operatorToSymbol() + this.operand
                         }`;
+                        // }
                     }
                 }
 
                 // todo:
                 updateHistory() {}
+                onKeyDown() {}
 
                 operatorToSymbol() {
-                    switch (this._operator) {
+                    switch (this.operator) {
                         case 'add':
                             return '+';
                         case 'subtract':
