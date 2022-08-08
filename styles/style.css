@@ -1,4 +1,7 @@
 /* style.css */
+html {
+    font-family: 'Roboto', monospace;
+}
 
 body {
     display: flex;
@@ -7,11 +10,12 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
+    font-family: 'Roboto', monospace;
 }
 
 main {
-    min-width: 40vw;
-    min-height: 60vh;
+    width: 300px;
+    height: 500px;
     display: grid;
     grid-template-rows: 0.5fr 1fr 4fr;
 }
@@ -30,7 +34,7 @@ main {
     border: 0.5px solid red;
     text-align: end;
     justify-content: center;
-    font-family: 'Segoe UI';
+
     font-size: 2rem;
     min-width: 0;
     min-height: 0;
@@ -38,11 +42,13 @@ main {
     padding: 0.4rem;
 }
 
-[data-action='equals'] {
+button:nth-child(17) {
     grid-column: span 2;
 }
 
 button {
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', monospace;
+    font-size: 1.4rem;
 }

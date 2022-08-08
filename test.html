@@ -57,42 +57,31 @@
         <script>
             class Calculator {
                 #elem;
+                #display;
 
                 operator = '';
                 operand = '';
                 result = '';
 
-                isFloat = false;
-
-                display = document.getElementById('display');
-
-                // ✔️
-                constructor(elem) {
+                constructor(elem, display) {
                     this.#elem = elem;
+                    this.#display = display;
                     elem.onclick = this.onClick.bind(this);
                 }
 
-                // ✔️ might need to work on floating point bullshit
                 add() {
                     this.calculate('add');
                 }
-
-                // ✔️
                 subtract() {
                     this.calculate('subtract');
                 }
-
-                // ✔️
                 multiply() {
                     this.calculate('multiply');
                 }
-
-                // ✔️
                 divide() {
                     this.calculate('divide');
                 }
 
-                // ✔️
                 calculate(operation) {
                     if (!operation) {
                         console.log('no operation');
@@ -101,7 +90,7 @@
                         console.log('no operand and no result');
                         return;
                     }
-                    // operator exists
+
                     this.operator = operation;
 
                     if (this.operand && this.result) {
@@ -110,38 +99,28 @@
                             parseFloat(this.result),
                             parseFloat(this.operand)
                         )}`;
-                        this.operand = '';
-                        this.isFloat = false;
+                        // this.operand = '';
                     } else if (this.operand) {
                         this.result = this.operand;
                         this.operand = '';
-                        this.isFloat = false;
                     }
 
                     if (!isFinite(this.result)) {
-                        console.log('lmao. shit went wrong');
                         console.log(this.result);
-                        this.allClear();
                     }
                 }
 
-                // ✔️ todo: keep pressing equals
-                // need to remove operator for accurate display
                 equals() {
                     this.calculate(this.operator);
-                    this.operator = '';
+                    // this.operator = '';
                 }
 
-                // ✔️
                 allClear() {
                     this.operator = '';
                     this.operand = '';
                     this.result = '';
-                    this.isFloat = false;
-                    console.log(this);
                 }
 
-                // ✔️
                 invert() {
                     if (!this.operand && !this.result) {
                         return;
@@ -160,69 +139,57 @@
                     }
                 }
 
-                // ✔️
                 back() {
                     if (this.operand) {
                         this.operand = this.operand.slice(0, -1);
-                        // doing this without a search would be ideal
-                        // could store result from removal and compare against '.'
-                        if (this.operand.search('.') < 1) {
-                            this.isFloat = false;
-                        }
                     } else if (this.operator) {
                         this.operator = '';
                     } else {
-                        // maybe assign result to operand? can't add decimal back after removal from result
                         this.result = this.result.slice(0, -1);
                     }
                 }
 
-                // ✔️ can't add decimal to result might change
                 decimal() {
-                    if (this.isFloat) {
+                    if (this.operand.includes('.')) {
                         return;
-                    } else if (!this.operator && !this.operand) {
-                        return;
-                    } else {
-                        this.operand += '.';
-                        this.isFloat = true;
                     }
+                    this.operand += '.';
                 }
 
-                // ✔️
                 number(event) {
                     this.operand += event.target.innerText;
                 }
 
-                // ✔️
                 onClick(event) {
                     let action = event.target.dataset.action;
                     if (action) {
                         this[action](event);
-                        this.updateDisplay();
+                        this.updateDisplay(action);
+                        console.log(this);
                     }
                 }
 
-                // ✔️
-                updateDisplay() {
-                    // special case otherwise just display the string
-                    if (this.operator && this.operand && !this.result) {
-                        this.display.innerText = `${
-                            this.operand + this.operatorToSymbol()
-                        }`;
+                updateDisplay(action) {
+                    if (action === 'number' || action === 'decimal') {
+                        this.#display.innerText = `${this.operand}`;
+                    } else if (action === 'equals') {
+                        this.#display.innerText = `${this.result}`;
                     } else {
-                        this.display.innerText = this.toString();
+                        this.#display.innerText = `${
+                            this.operand
+                        } ${this.operatorToSymbol()}`;
                     }
+
+                    // // after result
+                    // this.#display.innerText = this.toString();
                 }
 
-                // ✔️
                 toString() {
-                    return `${
-                        this.result + this.operatorToSymbol() + this.operand
+                    return `${this.result} ${this.operatorToSymbol()} ${
+                        this.operand
                     }`;
                 }
 
-                // ✔️
                 operatorToSymbol() {
                     switch (this.operator) {
                         case 'add':
@@ -243,37 +210,24 @@
                 onKeyDown() {}
             }
 
-            new Calculator(keypad);
+            new Calculator(
+                document.getElementById('keypad'),
+                document.getElementById('display')
+            );
 
             function operate(operator, num1, num2) {
                 switch (operator) {
                     case 'add':
-                        return add(num1, num2);
+                        return num1 + num2;
                     case 'subtract':
-                        return subtract(num1, num2);
+                        return num1 - num2;
                     case 'multiply':
-                        return multiply(num1, num2);
+                        return num1 * num2;
                     case 'divide':
-                        return divide(num1, num2);
+                        return num1 / num2;
                     default:
                         return 'Oops';
                 }
-            }
-
-            function add(x, y) {
-                return x + y;
-            }
-
-            function subtract(x, y) {
-                return x - y;
-            }
-
-            function multiply(x, y) {
-                return x * y;
-            }
-
-            function divide(x, y) {
-                return x / y;
             }
         </script>
     </body>
