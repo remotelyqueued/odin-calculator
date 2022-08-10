@@ -1,131 +1,138 @@
 // calculator.js
+
+class Data {
+    constructor() {
+        this.x = '';
+        this.y = '';
+        this.op = '';
+    }
+}
+
 export class Calculator {
     constructor(elem, display) {
         this.elem = elem;
         this.display = display;
-        this.current = '';
-        this.previous = '';
-        this.op = '';
-        this.priorOperand = '';
-        this.priorOp = '';
-        this.eq = '';
+
+        this.current = new Data();
+        this.previous = new Data();
+
         elem.onclick = this.onClick.bind(this);
     }
 
     number(innerText) {
         // handles lol and 3 + . resetting
-        if (!isFinite(this.current) && this.current !== '.') {
-            this.current = innerText;
+        if (!isFinite(this.current.x) && this.current.x !== '.') {
+            this.current.x = innerText;
         } else {
-            this.current += innerText;
+            this.current.x += innerText;
         }
     }
 
     operator(innerText) {
         // handles "" + ""
-        this.eq = innerText;
-        if (!this.current && !this.previous) return;
+        this.previous.y = innerText;
+        if (!this.current.x && !this.current.y) return;
         // if current and previous exist don't change operator
-        if (this.current && this.previous) return;
+        if (this.current.x && this.current.y) return;
         // handles . + .
-        if (isNaN(this.current)) return;
+        if (isNaN(this.current.x)) return;
         // handles ++++
-        if (!this.op.includes(innerText)) {
-            this.op = innerText;
+        if (!this.current.op.includes(innerText)) {
+            this.current.op = innerText;
             // handles 3 + 3 + ..end up with .03.032 + 02-248
-            if (!this.previous) {
-                this.previous = this.current;
-                this.current = '';
+            if (!this.current.y) {
+                this.current.y = this.current.x;
+                this.current.x = '';
             }
         }
     }
 
     equals(innerText) {
-        if (innerText === this.eq) {
-            this.current = `${this.operate(
-                this.priorOp,
-                parseFloat(this.current),
-                parseFloat(this.priorOperand)
+        // handles 3 + . =, = NaN
+        if (innerText === this.previous.y && this.previous.x) {
+            this.current.x = `${this.operate(
+                this.previous.op,
+                parseFloat(this.current.x),
+                parseFloat(this.previous.x)
             )}`;
         } // handles 3 = or 3 + =
-        else if (!this.previous || !this.current) {
+        else if (!this.current.y || !this.current.x) {
             return;
         } else {
-            this.priorOp = this.op;
-            this.priorOperand = this.current;
-            this.eq = '=';
+            this.previous.op = this.current.op;
+            // handles 3 + . =, = NaN
+            this.current.x === '.'
+                ? (this.previous.x = '')
+                : (this.previous.x = this.current.x);
+            this.previous.y = '=';
             this.compute();
         }
     }
 
     compute() {
         // handles 3 + .
-        if (isNaN(parseFloat(this.current))) return;
+        if (isNaN(parseFloat(this.current.x))) return;
         // divion by 0
-        if (parseFloat(this.current) === 0 && this.op === '÷') {
-            this.current = 'lol';
+        if (parseFloat(this.current.x) === 0 && this.current.op === '÷') {
+            this.current.x = 'lol';
             // handles after "lol" from division by 0
-            this.eq = '';
+            this.previous.y = '';
         } else {
-            this.current = `${this.operate(
-                this.op,
-                parseFloat(this.previous),
-                parseFloat(this.current)
+            this.current.x = `${this.operate(
+                this.current.op,
+                parseFloat(this.current.y),
+                parseFloat(this.current.x)
             )}`;
         }
-        this.previous = '';
-        this.op = '';
+        this.current.y = '';
+        this.current.op = '';
     }
 
     ac() {
         this.display.innerText = '';
-        this.current = '';
-        this.previous = '';
-        this.op = '';
-        this.priorOp = '';
-        this.priorOperand = '';
-        this.eq = '';
+        this.current = new Data();
+        this.previous = new Data();
     }
 
     invert() {
         // handles inverting an empty string
-        if (isNaN(parseFloat(this.current))) return;
+        if (isNaN(parseFloat(this.current.x))) return;
         // would prefer to handle all operations in compute
-        this.current = `${this.operate(
+        this.current.x = `${this.operate(
             'x',
-            parseFloat(this.current),
+            parseFloat(this.current.x),
             parseFloat('-1')
         )}`;
     }
 
     back() {
-        if (this.current) {
-            this.current = this.current.slice(0, -1);
+        if (this.current.x) {
+            this.current.x = this.current.x.slice(0, -1);
             // handles - left in current after invert
-            if (this.current === '-') this.current = '';
+            if (this.current.x === '-') this.current.x = '';
             // current and op are empty start removing previous
-        } else if (!this.current && !this.op) {
+        } else if (!this.current.x && !this.current.op) {
             return;
-        } else if (!this.current) {
-            this.op = '';
-            this.current = this.previous;
-            this.previous = '';
+        } else if (!this.current.x) {
+            this.current.op = '';
+            this.current.x = this.current.y;
+            this.current.y = '';
         }
     }
 
     decimal() {
         // if decimal in current
-        if (this.current.includes('.')) return;
-        this.current += '.';
+        if (this.current.x.includes('.')) return;
+        this.current.x += '.';
     }
 
     updateDisplay() {
-        if (this.previous) {
-            this.display.innerText = `${this.previous} ${this.op} ${this.current}`;
-        } else if (!this.previous && !this.current) {
+        if (this.current.y) {
+            this.display.innerText = `${this.current.y} ${this.current.op} ${this.current.x}`;
+        } else if (!this.current.y && !this.current.x) {
             this.display.innerText = '';
-        } else if (!this.previous) {
-            this.display.innerText = `${this.current} ${this.op}`;
+        } else if (!this.current.y) {
+            this.display.innerText = `${this.current.x} ${this.current.op}`;
         }
     }
 
@@ -151,6 +158,8 @@ export class Calculator {
         if (action) {
             this[action](event.target.innerText);
             this.updateDisplay();
+            console.log(this.current);
+            console.log(this.previous);
         }
     }
 }
