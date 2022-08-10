@@ -56,12 +56,16 @@
 
         <script>
             class Calculator {
-                #elem;
-                #display;
+                #elem = null;
+                #display = null;
 
                 operator = '';
                 operand = '';
                 result = '';
+
+                onScreen = '';
+
+                previous = '';
 
                 constructor(elem, display) {
                     this.#elem = elem;
@@ -82,7 +86,7 @@
                     this.calculate('divide');
                 }
 
-                calculate(operation) {
+                calculate(operation, action) {
                     if (!operation) {
                         console.log('no operation');
                         return;
@@ -99,10 +103,18 @@
                             parseFloat(this.result),
                             parseFloat(this.operand)
                         )}`;
-                        // this.operand = '';
+                        this.previous = this.operand;
+                        this.operand = '';
                     } else if (this.operand) {
                         this.result = this.operand;
                         this.operand = '';
+                    } else if (action === 'equals') {
+                        console.log('in this previous');
+                        this.result = `${operate(
+                            this.operator,
+                            parseFloat(this.result),
+                            parseFloat(this.previous)
+                        )}`;
                     }
 
                     if (!isFinite(this.result)) {
@@ -110,15 +122,24 @@
                     }
                 }
 
-                equals() {
-                    this.calculate(this.operator);
-                    // this.operator = '';
+                onClick(event) {
+                    let action = event.target.dataset.action;
+                    if (action) {
+                        this[action](event);
+                        this.updateDisplay(action);
+                        console.log(this);
+                    }
+                }
+
+                equals(action) {
+                    this.calculate(this.operator, action);
                 }
 
                 allClear() {
                     this.operator = '';
                     this.operand = '';
                     this.result = '';
+                    this.#display.innerText = '';
                 }
 
                 invert() {
@@ -140,54 +161,38 @@
                 }
 
                 back() {
-                    if (this.operand) {
-                        this.operand = this.operand.slice(0, -1);
+                    if (this.result) {
+                        this.result = this.result.slice(0, -1);
                     } else if (this.operator) {
+                        this.operand = this.operand.slice(0, -1);
                         this.operator = '';
                     } else {
-                        this.result = this.result.slice(0, -1);
+                        
                     }
                 }
 
                 decimal() {
-                    if (this.operand.includes('.')) {
-                        return;
+                    if (!this.operand.includes('.')) {
+                        this.operand += '.';
                     }
-                    this.operand += '.';
                 }
 
                 number(event) {
                     this.operand += event.target.innerText;
                 }
 
-                onClick(event) {
-                    let action = event.target.dataset.action;
-                    if (action) {
-                        this[action](event);
-                        this.updateDisplay(action);
-                        console.log(this);
-                    }
-                }
-
+                // lol kind of a mess
                 updateDisplay(action) {
-                    if (action === 'number' || action === 'decimal') {
-                        this.#display.innerText = `${this.operand}`;
-                    } else if (action === 'equals') {
-                        this.#display.innerText = `${this.result}`;
+                    if (action === 'equals' && this.result) {
+                        this.#display.innerText = this.result;
+                        this.onScreen = 'result';
+                    } else if (this.operand && !this.result && !this.operator) {
+                        this.#display.innerText = this.operand;
                     } else {
                         this.#display.innerText = `${
-                            this.operand
-                        } ${this.operatorToSymbol()}`;
+                            this.result
+                        } ${this.operatorToSymbol()} ${this.operand}`;
                     }
-
-                    // // after result
-                    // this.#display.innerText = this.toString();
-                }
-
-                toString() {
-                    return `${this.result} ${this.operatorToSymbol()} ${
-                        this.operand
-                    }`;
                 }
 
                 operatorToSymbol() {
