@@ -54,9 +54,6 @@
         <footer></footer>
 
         <script>
-            // todo: trim float output (round)
-            // equals spam - keep computing
-            // odd issues inverting a decimal
             // lol this is false isNaN('')
             class Calculator {
                 constructor(elem, display) {
@@ -71,7 +68,7 @@
                 }
 
                 number(innerText) {
-                    // handles division by 0 case
+                    // handles division by 0 
                     if (isNaN(this.current)) {
                         this.current = innerText;
                     } else {
@@ -79,7 +76,6 @@
                     }
                 }
 
-                // +, -, ÷, x
                 operator(innerText) {
                     // handles "" + ""
                     if (!this.current && !this.previous) return;
@@ -125,7 +121,7 @@
 
                 invert(event) {
                     // handles inverting an empty string lol
-                    if (isNaN(parseFloat(this.current))) return;                  
+                    if (isNaN(parseFloat(this.current))) return;
                     this.current = `${operate(
                         'x',
                         parseFloat(this.current),
@@ -138,7 +134,7 @@
                         this.current = this.current.slice(0, -1);
                         // handles - left in current after invert
                         if (this.current === '-') this.current = '';
-                    // current and op are empty start removing previous
+                        // current and op are empty start removing previous
                     } else if (!this.current && !this.op) {
                         this.previous = this.previous.slice(0, -1);
                     } else if (!this.current) {
@@ -154,17 +150,11 @@
 
                 updateDisplay() {
                     if (this.previous) {
-                        // swap display if previous exists
-                        console.log('1.');
                         this.display.innerText = `${this.previous} ${this.op} ${this.current}`;
                     } else if (!this.previous && !this.current) {
-                        // don't display just operator
-                        console.log('2.');
                         this.display.innerText = '';
                         return;
                     } else if (!this.previous) {
-                        // just display current and op
-                        console.log('3.');
                         this.display.innerText = `${this.current} ${this.op}`;
                     }
                 }
