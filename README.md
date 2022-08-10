@@ -8,4 +8,13 @@ tried to catch most basic errors I could
 
 I started out trying to use arrays but ran into issues having to parse things in multiple places so I restarted the project a few times
 
-went a bit out of scope but I think created something I am somewhat proud of 
+went a bit out of scope but I think created something I am somewhat proud of
+
+todo:
+- look for unused code (reduce logic)
+- rename variables
+- keydown
+- integrate operate into code a bit better
+- play sounds on click
+- handle floating point math better
+- remove history display

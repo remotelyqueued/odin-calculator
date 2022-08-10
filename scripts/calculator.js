@@ -1,10 +1,4 @@
 // calculator.js
-
-// todo:
-// look for unused code
-// rename variables
-// keydown
-// integrate operate into code a bit better
 export class Calculator {
     constructor(elem, display) {
         this.elem = elem;
@@ -19,7 +13,7 @@ export class Calculator {
     }
 
     number(innerText) {
-        // handles division by 0 and 3 + . resetting
+        // handles lol and 3 + . resetting
         if (!isFinite(this.current) && this.current !== '.') {
             this.current = innerText;
         } else {
@@ -70,7 +64,7 @@ export class Calculator {
         // divion by 0
         if (parseFloat(this.current) === 0 && this.op === '÷') {
             this.current = 'lol';
-            // handles = after "lol" from division by 0
+            // handles after "lol" from division by 0
             this.eq = '';
         } else {
             this.current = `${this.operate(
