@@ -11,13 +11,19 @@ body {
     justify-content: center;
     align-items: center;
     font-family: 'Roboto', monospace;
+
+    margin: 0;
+    padding: 0;
 }
 
 main {
-    width: 300px;
-    height: 500px;
+    width: 360px;
+    height: 600px;
     display: grid;
-    grid-template-rows: 0.5fr 1fr 4fr;
+
+    margin: 0;
+    padding: 0;
+    grid-template-rows: 0.5fr 1.5fr 4fr;
 }
 
 #keypad {
@@ -26,8 +32,8 @@ main {
     gap: 0;
 }
 
-#history {
-    border: 0.5px solid red;
+#header {
+    border: 1px dashed red;
 }
 
 #display {
@@ -35,7 +41,7 @@ main {
     text-align: end;
     justify-content: center;
 
-    font-size: 2rem;
+    font-size: 4rem;
     min-width: 0;
     min-height: 0;
     overflow: hidden;
