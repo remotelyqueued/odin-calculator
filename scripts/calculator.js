@@ -222,8 +222,6 @@ export class Calculator {
         if (action) {
             this[action](event.target.innerText);
             this.updateDisplay();
-            console.log('current:', this.current);
-            console.log('previous:', this.previous);
         }
     }
 }

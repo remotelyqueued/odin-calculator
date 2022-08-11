@@ -1,7 +1,7 @@
 /* style.css */
 
 html {
-    font-family: 'Roboto', monospace;
+    font-family: 'Inter', sans-serif;
 }
 
 body {
@@ -11,7 +11,7 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
-    font-family: 'Roboto', monospace;
+    font-family: 'Inter', sans-serif;
 
     margin: 0;
     padding: 0;
@@ -30,7 +30,9 @@ main {
 #keypad {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0;
+    gap: 1px;
+    background-color: #000000;
+    border: 2px solid #000000;
 }
 
 #header {
@@ -44,14 +46,28 @@ main {
 
     font-size: 3rem;
     overflow: hidden;
-    padding: 0.4rem; 
+    padding: 0.4rem;
+}
+
+button:nth-child(1) {
+    background-color: #ee786e;
 }
 
 button:nth-child(17) {
     grid-column: span 2;
 }
 
+button:nth-child(19) {
+    background-color: #a2ccb6;
+}
+
 button {
-    font-family: 'Roboto', monospace;
+    font-family: 'Inter', sans-serif;
     font-size: 1.4rem;
+    border: 1px solid #000000;
+    background-color: #fffff4;
+    border-radius: 2px;
+
+    display: inline-flex;
+    align-items: flex-end;
 }
