@@ -35,7 +35,14 @@ export class Calculator {
         }
         // if current and previous exist compute
         if (this.current.x && this.current.y) {
+            console.log('here');
             this.compute();
+            // handles result + x = xresult +
+            this.current.op = innerText;
+            if (!this.current.y) {
+                this.current.y = this.current.x;
+                this.current.x = '';
+            }
             return;
         }
         // handles . + .
@@ -143,7 +150,7 @@ export class Calculator {
         } else if (this.current.y) {
             this.display.innerText = `${this.current.y} ${this.current.op} ${this.current.x}`;
         } else if (this.current.x) {
-            this.display.innerText = `${this.current.x}`;
+            this.display.innerText = `${this.current.x} ${this.current.op}`;
         }
     }
 
