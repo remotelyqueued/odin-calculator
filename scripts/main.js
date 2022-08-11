@@ -2,7 +2,6 @@
 // lot of special cases ... phew
 import { Calculator } from './calculator.js';
 
-new Calculator(
-    document.body,
-    document.getElementById('display')
-);
+// setCapture warning firefox linux from vs code server
+// no warning on nginx
+new Calculator(document.body, document.getElementById('display'));

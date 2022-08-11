@@ -14,12 +14,12 @@ export class Calculator {
         this.display = display;
         this.current = new Data();
         this.previous = new Data();
-        elem.onclick = this.onClick.bind(this);
+        elem.onpointerdown = this.onPointerDown.bind(this);
         elem.onkeydown = this.onKeyDown.bind(this);
     }
 
     number(innerText) {
-        // handles "lol" and 3 + . resetting
+        // handles "lol" in current and 3 + . resetting
         if (!isFinite(this.current.x) && this.current.x !== '.') {
             this.current.x = innerText;
         } else {
@@ -34,7 +34,6 @@ export class Calculator {
             return;
         }
         if (this.current.x && this.current.y) {
-            console.log('here');
             this.compute();
             // handles result + x = xresult +
             this.current.op = innerText;
@@ -51,7 +50,7 @@ export class Calculator {
         // handles ++++
         if (!this.current.op.includes(innerText)) {
             this.current.op = innerText;
-            // handles 3 + 3 + ..end up with .03.032 + 02-248
+            // handles 3 + 3 + ... .03.032 + 02-248
             if (!this.current.y) {
                 this.current.y = this.current.x;
                 this.current.x = '';
@@ -172,6 +171,10 @@ export class Calculator {
     }
 
     onKeyDown(event) {
+        // on firefox in linux search box
+        // pops up on / over keypad
+        event.preventDefault();
+
         const keyCodes = [
             '+',
             '-',
@@ -214,7 +217,7 @@ export class Calculator {
         this.updateDisplay();
     }
 
-    onClick(event) {
+    onPointerDown(event) {
         let action = event.target.dataset.action;
         if (action) {
             this[action](event.target.innerText);
