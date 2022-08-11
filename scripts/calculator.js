@@ -26,16 +26,23 @@ export class Calculator {
         }
     }
 
-    operator(innerText) {
-        // handles "" + ""
+    operator(innerText) {      
         this.previous.y = innerText;
-        if (!this.current.x && !this.current.y) return;
-        // if current and previous exist don't change operator
-        if (this.current.x && this.current.y) return;
+        // handles "" + ""
+        if (!this.current.x && !this.current.y) {
+            return;
+        }
+        // if current and previous exist compute
+        if (this.current.x && this.current.y) {
+            this.compute();
+            return;
+        }
         // handles . + .
-        if (isNaN(this.current.x)) return;
+        if (isNaN(this.current.x)) {
+            return;
+        }
         // handles ++++
-        if (!this.current.op.includes(innerText)) {
+        if (!this.current.op.includes(innerText)) {         
             this.current.op = innerText;
             // handles 3 + 3 + ..end up with .03.032 + 02-248
             if (!this.current.y) {
@@ -155,7 +162,7 @@ export class Calculator {
                 result = num1 / num2;
                 break;
             default:
-                console.log('Calculation failed');
+                return NaN;
         }
         return Math.round(result * 1000) / 1000;
     }
@@ -166,8 +173,8 @@ export class Calculator {
         if (action) {
             this[action](event.target.innerText);
             this.updateDisplay();
-            console.log(this.current);
-            console.log(this.previous);
+            console.log('current:', this.current);
+            console.log('previous:', this.previous);
         }
     }
 }

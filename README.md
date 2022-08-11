@@ -25,9 +25,9 @@ todo:
 ✔️ floating point numbers
 ✔️ backspace
 ✔️ round long answers
+✔️ string together several operations
 
 -   formatted output (commas)
--   string together several operations
 -   ui css
 -   keyboard support
 -   sound
