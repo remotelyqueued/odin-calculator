@@ -26,8 +26,8 @@ todo:
 ✔️ backspace
 ✔️ round long answers
 ✔️ string together several operations
+✔️ keyboard support
 
 -   formatted output (commas)
 -   ui css
--   keyboard support
 -   sound

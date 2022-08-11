@@ -1,8 +1,9 @@
 // lol isNaN('') is false
-// lot of special cases getting kinda ugly lol
+// lot of special cases ... phew
 import { Calculator } from './calculator.js';
 
 new Calculator(
-    document.getElementById('keypad'),
+    document.body,
+    // document.getElementById('keypad'), // for onkeydown
     document.getElementById('display')
 );

@@ -15,6 +15,7 @@ export class Calculator {
         this.current = new Data();
         this.previous = new Data();
         elem.onclick = this.onClick.bind(this);
+        elem.onkeydown = this.onKeyDown.bind(this);
     }
 
     number(innerText) {
@@ -26,7 +27,7 @@ export class Calculator {
         }
     }
 
-    operator(innerText) {      
+    operator(innerText) {
         this.previous.y = innerText;
         // handles "" + ""
         if (!this.current.x && !this.current.y) {
@@ -42,7 +43,7 @@ export class Calculator {
             return;
         }
         // handles ++++
-        if (!this.current.op.includes(innerText)) {         
+        if (!this.current.op.includes(innerText)) {
             this.current.op = innerText;
             // handles 3 + 3 + ..end up with .03.032 + 02-248
             if (!this.current.y) {
@@ -167,7 +168,49 @@ export class Calculator {
         return Math.round(result * 1000) / 1000;
     }
 
-    onKeyDown() {}
+    onKeyDown(event) {
+        const keyCodes = [
+            '+',
+            '-',
+            'x',
+            '*',
+            '/',
+            '=',
+            'Backspace',
+            '.',
+            'Enter',
+        ];
+
+        if (keyCodes.includes(event.key)) {
+            switch (event.key) {
+                case '+':
+                case '-':
+                    this.operator(event.key);
+                    break;
+                case 'x':
+                case '*':
+                    this.operator('x');
+                    break;
+                case '/':
+                    this.operator('÷');
+                    break;
+                case '=':
+                case 'Enter':
+                    this.equals('=');
+                    break;
+                case 'Backspace':
+                    this.back();
+                    break;
+                case '.':
+                    this.decimal();
+                    break;
+            }
+        } else if (event.key >= '0' && event.key <= '9') {
+            this.number(event.key);
+        }
+        this.updateDisplay();
+    }
+
     onClick(event) {
         let action = event.target.dataset.action;
         if (action) {
