@@ -11,10 +11,22 @@ I started out trying to use arrays but ran into issues having to parse things in
 went a bit out of scope but I think created something I am somewhat proud of
 
 todo:
-- look for unused code (reduce logic)
-- rename variables
-- keydown
-- integrate operate into code a bit better
-- play sounds on click
-- handle floating point math better
-- remove history display
+
+✔️ add
+✔️ subtract
+✔️ multiply
+✔️ divide
+✔️ operate function
+✔️ display function
+✔️ evaluate single pair at a time
+✔️ not allow pressing equal before entering all numbers  
+✔️ clear wipes data
+✔️ handle division by 0
+✔️ floating point numbers
+✔️ backspace
+
+-   string together several operations
+-   round long answers
+-   ui css
+-   keyboard support
+-   sound

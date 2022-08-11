@@ -97,7 +97,6 @@ export class Calculator {
     invert() {
         // handles inverting an empty string
         if (isNaN(parseFloat(this.current.x))) return;
-        // would prefer to handle all operations in compute
         this.current.x = `${this.operate(
             'x',
             parseFloat(this.current.x),
@@ -127,29 +126,35 @@ export class Calculator {
     }
 
     updateDisplay() {
-        if (this.current.y) {
-            this.display.innerText = `${this.current.y} ${this.current.op} ${this.current.x}`;
-        } else if (!this.current.y && !this.current.x) {
+        // tried to make this easier to understand
+        if (!this.current.x && !this.current.y) {
             this.display.innerText = '';
-        } else if (!this.current.y) {
-            this.display.innerText = `${this.current.x} ${this.current.op}`;
+        } else if (this.current.y) {
+            this.display.innerText = `${this.current.y} ${this.current.op} ${this.current.x}`;
+        } else if (this.current.x) {
+            this.display.innerText = `${this.current.x}`;
         }
     }
 
-    // required by assignment
     operate(operator, num1, num2) {
+        let result;
         switch (operator) {
             case '+':
-                return num1 + num2;
+                result = num1 + num2;
+                break;
             case '-':
-                return num1 - num2;
+                result = num1 - num2;
+                break;
             case 'x':
-                return num1 * num2;
+                result = num1 * num2;
+                break;
             case '÷':
-                return num1 / num2;
+                result = num1 / num2;
+                break;
             default:
-                return operator;
+                console.log('Calculation failed');
         }
+        return result;
     }
 
     onKeyDown() {}
