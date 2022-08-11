@@ -12,10 +12,8 @@ export class Calculator {
     constructor(elem, display) {
         this.elem = elem;
         this.display = display;
-
         this.current = new Data();
         this.previous = new Data();
-
         elem.onclick = this.onClick.bind(this);
     }
 
@@ -109,10 +107,15 @@ export class Calculator {
             this.current.x = this.current.x.slice(0, -1);
             // handles - left in current after invert
             if (this.current.x === '-') this.current.x = '';
+            // if current is empty after last delete remove previous
+            // handles empty screen = NaN
+            if (!this.current.x) this.previous.y = '';
             // current and op are empty start removing previous
         } else if (!this.current.x && !this.current.op) {
+            console.log('lol');
             return;
         } else if (!this.current.x) {
+            // reaches here if deleting an equation
             this.current.op = '';
             this.current.x = this.current.y;
             this.current.y = '';
@@ -154,7 +157,7 @@ export class Calculator {
             default:
                 console.log('Calculation failed');
         }
-        return result;
+        return Math.round(result * 1000) / 1000;
     }
 
     onKeyDown() {}

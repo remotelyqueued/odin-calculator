@@ -24,9 +24,10 @@ todo:
 ✔️ handle division by 0
 ✔️ floating point numbers
 ✔️ backspace
+✔️ round long answers
 
+-   formatted output (commas)
 -   string together several operations
--   round long answers
 -   ui css
 -   keyboard support
 -   sound
