@@ -19,7 +19,7 @@ export class Calculator {
     }
 
     number(innerText) {
-        // handles lol and 3 + . resetting
+        // handles "lol" and 3 + . resetting
         if (!isFinite(this.current.x) && this.current.x !== '.') {
             this.current.x = innerText;
         } else {
@@ -33,7 +33,6 @@ export class Calculator {
         if (!this.current.x && !this.current.y) {
             return;
         }
-        // if current and previous exist compute
         if (this.current.x && this.current.y) {
             console.log('here');
             this.compute();
@@ -108,7 +107,7 @@ export class Calculator {
     }
 
     invert() {
-        // handles inverting an empty string
+        // handles inverting an empty string, "."
         if (isNaN(parseFloat(this.current.x))) return;
         this.current.x = `${this.operate(
             'x',
@@ -122,15 +121,13 @@ export class Calculator {
             this.current.x = this.current.x.slice(0, -1);
             // handles - left in current after invert
             if (this.current.x === '-') this.current.x = '';
-            // if current is empty after last delete remove previous
-            // handles empty screen = NaN
+            // handles empty screen = NaN after calculation
             if (!this.current.x) this.previous.y = '';
             // current and op are empty start removing previous
         } else if (!this.current.x && !this.current.op) {
-            console.log('lol');
             return;
         } else if (!this.current.x) {
-            // reaches here if deleting an equation
+            // handles 3 + back back
             this.current.op = '';
             this.current.x = this.current.y;
             this.current.y = '';
@@ -138,13 +135,12 @@ export class Calculator {
     }
 
     decimal() {
-        // if decimal in current
+        // handles multiple '.'
         if (this.current.x.includes('.')) return;
         this.current.x += '.';
     }
 
     updateDisplay() {
-        // tried to make this easier to understand
         if (!this.current.x && !this.current.y) {
             this.display.innerText = '';
         } else if (this.current.y) {

@@ -4,6 +4,5 @@ import { Calculator } from './calculator.js';
 
 new Calculator(
     document.body,
-    // document.getElementById('keypad'), // for onkeydown
     document.getElementById('display')
 );
