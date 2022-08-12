@@ -8,7 +8,8 @@ class Data {
     }
 }
 
-// this.previous.y stores last operation; using equals multiple times
+// this.previous.y stores last operation; for using equals multiple times
+// it will either be empty or '='
 // this.previous.op stores last operator
 export class Calculator {
     constructor(elem, display) {
@@ -31,9 +32,13 @@ export class Calculator {
 
     operator(innerText) {
         // handles 3 + 3 = =
-        this.previous.y = innerText;
+        this.previous.y = '';
         // handles "" + ""
         if (!this.current.x && !this.current.y) {
+            return;
+        }
+        // handles . + .
+        if (isNaN(this.current.x)) {
             return;
         }
         if (this.current.x && this.current.y) {
@@ -42,10 +47,6 @@ export class Calculator {
             this.current.op = innerText;
             this.current.y = this.current.x;
             this.current.x = '';
-            return;
-        }
-        // handles . + .
-        if (isNaN(this.current.x)) {
             return;
         }
         // handles ++++
@@ -88,7 +89,7 @@ export class Calculator {
         if (parseFloat(this.current.x) === 0 && this.current.op === '÷') {
             this.current.x = 'lol';
             // handles after "lol" from division by 0
-            this.previous.y = '';
+            this.previous = new Data();
         } else {
             this.current.x = `${this.operate(
                 this.current.op,
@@ -236,6 +237,7 @@ export class Calculator {
             this[action](event.target.innerText);
             this.playAudio();
             this.updateDisplay();
+            console.assert(this.previous.y === '' || this.previous.y === '=');
         }
     }
 }
