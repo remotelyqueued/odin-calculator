@@ -139,7 +139,7 @@ main {
     border: 3px solid black;
     text-align: end;
     font-size: var(--font-size);
-    overflow: hidden;
+    overflow-y: scroll;
     padding: 0.8rem;
     overflow-wrap: break-word;
 
@@ -159,4 +159,12 @@ button:nth-child(17) {
 
 button:nth-child(19) {
     background-color: #a2ccb6;
+}
+
+/* https://stackoverflow.com/questions/9664325/style-the-scrollbar-with-css-in-google-chrome-webkit */
+.invisible-scrollbar {
+    scrollbar-width: none;
+}
+.invisible-scrollbar::-webkit-scrollbar {
+    display: none;
 }

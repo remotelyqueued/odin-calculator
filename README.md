@@ -29,7 +29,9 @@ todo:
 ✔️ keyboard support
 ✔️ sound
 ✔️ pick a font
-✔️ text overflow
+✔️ text overflow (break)
+✔️ formatted text (commas)
+✔️ text overflow (scroll)
 
 -   ui css
 -   pick a color scheme

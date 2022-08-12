@@ -8,7 +8,7 @@ class Data {
     }
 }
 
-// this.previous.y stores last operation; for using equals multiple times
+// used this.previous.y to store last operation; equals chaining
 // it will either be empty or '='
 // this.previous.op stores last operator
 export class Calculator {
@@ -83,12 +83,12 @@ export class Calculator {
     }
 
     compute() {
-        // handles 3 + .
+        // handles 3 + decimal
         if (isNaN(parseFloat(this.current.x))) return;
         // divion by 0
         if (parseFloat(this.current.x) === 0 && this.current.op === '÷') {
             this.current.x = 'lol';
-            // handles after "lol" from division by 0
+            // handles "lol" in current (chaining resets)
             this.previous = new Data();
         } else {
             this.current.x = `${this.operate(
@@ -120,7 +120,7 @@ export class Calculator {
     back() {
         if (this.current.x) {
             this.current.x = this.current.x.slice(0, -1);
-            // handles - left in current after invert
+            // handles negative sign left in current after invert
             if (this.current.x === '-') this.current.x = '';
             // handles empty screen = NaN after calculation
             if (!this.current.x) this.previous.y = '';
@@ -142,12 +142,16 @@ export class Calculator {
     }
 
     updateDisplay() {
+        // if x and y don't exist screen should be blank
         if (!this.current.x && !this.current.y) {
             this.display.innerText = '';
+        // if y exists print y first - op and x
+        // if op and x don't exist doesn't matter
         } else if (this.current.y) {
             this.display.innerText = `${this.numberWithCommas(
                 this.current.y
             )} ${this.current.op} ${this.numberWithCommas(this.current.x)}`;
+        // if x exists print x and op if it's there
         } else if (this.current.x) {
             this.display.innerText = `${this.numberWithCommas(
                 this.current.x

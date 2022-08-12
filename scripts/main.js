@@ -1,5 +1,5 @@
 // lol isNaN('') is false
-// lot of special cases ... phew
+// special cases wow
 import { Calculator } from './calculator.js';
 
 // setCapture warning firefox linux from vs code server
