@@ -6,9 +6,9 @@ not all user errors produce NaN or reset the calculation
 
 tried to catch most basic errors I could
 
-I started out trying to use arrays but ran into issues having to parse things in multiple places so I restarted the project a few times
+I started out trying to use arrays but ran into issues having to parse things in multiple places
 
-went a bit out of scope but I think created something I am somewhat proud of
+note to self: learn regex
 
 todo:
 
