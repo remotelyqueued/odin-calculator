@@ -87,20 +87,21 @@ button {
     font-size: 1.4rem;
     border: 3px solid #000000;
     background-color: #fffff4;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     display: inline-flex;
     align-items: flex-end;
 }
 
 h1 {
     font-size: 3rem;
-    font-family: 'patagonia';
+    font-family: var(--font);
 }
 
 :root {
     /* 3.4 */
     --font: 'patagonia';
     --font-size: 3.4rem;
+    --border-radius: 8px;
 }
 
 html {
@@ -131,20 +132,21 @@ main {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1px;
-    border-radius: 2px;
-}
-
-#header {
-    border: 1px dashed red;
+    border-radius: var(--border-radius);
 }
 
 #display {
-    border: 0.5px solid red;
+    border: 3px solid black;
     text-align: end;
     font-size: var(--font-size);
     overflow: hidden;
     padding: 0.8rem;
-    overflow-wrap: break-word;  
+    overflow-wrap: break-word;
+
+    background-color: hsl(100, 9%, 50%);
+    color: hsl(0, 0%, 21%);
+    border-radius: var(--border-radius);
+    margin-bottom: 2px;
 }
 
 button:nth-child(1) {

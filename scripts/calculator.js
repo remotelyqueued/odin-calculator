@@ -142,14 +142,24 @@ export class Calculator {
     }
 
     updateDisplay() {
-        // 20 characters
         if (!this.current.x && !this.current.y) {
             this.display.innerText = '';
         } else if (this.current.y) {
-            this.display.innerText = `${this.current.y} ${this.current.op} ${this.current.x}`;
+            this.display.innerText = `${this.numberWithCommas(
+                this.current.y
+            )} ${this.current.op} ${this.numberWithCommas(this.current.x)}`;
         } else if (this.current.x) {
-            this.display.innerText = `${this.current.x} ${this.current.op}`;
+            this.display.innerText = `${this.numberWithCommas(
+                this.current.x
+            )} ${this.current.op}`;
         }
+    }
+
+    // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+    // handles long decimals without inserting commas on the right side
+    // note: learn regex lol
+    numberWithCommas(x) {
+        return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
     }
 
     operate(operator, num1, num2) {
@@ -236,7 +246,7 @@ export class Calculator {
         let action = event.target.dataset.action;
         if (action) {
             this[action](event.target.innerText);
-            this.playAudio();
+            this.playAudio(action);
             this.updateDisplay();
             console.assert(this.previous.y === '' || this.previous.y === '=');
         }
