@@ -8,6 +8,8 @@ class Data {
     }
 }
 
+// this.previous.y stores last operation; using equals multiple times
+// this.previous.op stores last operator
 export class Calculator {
     constructor(elem, display) {
         this.elem = elem;
@@ -28,6 +30,7 @@ export class Calculator {
     }
 
     operator(innerText) {
+        // handles 3 + 3 = =
         this.previous.y = innerText;
         // handles "" + ""
         if (!this.current.x && !this.current.y) {
@@ -37,10 +40,8 @@ export class Calculator {
             this.compute();
             // handles result + x = xresult +
             this.current.op = innerText;
-            if (!this.current.y) {
-                this.current.y = this.current.x;
-                this.current.x = '';
-            }
+            this.current.y = this.current.x;
+            this.current.x = '';
             return;
         }
         // handles . + .
