@@ -171,10 +171,21 @@ export class Calculator {
         return Math.round(result * 1000) / 1000;
     }
 
+    playAudio(action) {
+        if (action === 'equals') {
+            const audio = new Audio('./sound/key-2.mp3');
+            audio.play();
+        } else {
+            const audio = new Audio('./sound/key.mp3');
+            audio.play();
+        }
+    }
+
     onKeyDown(event) {
         // on firefox in linux search box
         // pops up on / over keypad
         event.preventDefault();
+        this.playAudio(event.target.dataset.action);
 
         const keyCodes = [
             '+',
@@ -223,6 +234,7 @@ export class Calculator {
         if (action) {
             this[action](event.target.innerText);
             this.updateDisplay();
+            this.playAudio();
         }
     }
 }
