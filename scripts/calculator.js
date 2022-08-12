@@ -172,20 +172,18 @@ export class Calculator {
     }
 
     playAudio(action) {
-        if (action === 'equals') {
-            const audio = new Audio('./sound/key-2.mp3');
+        if (action === 'equals' || action === 'Enter') {
+            const audio = new Audio('./sounds/key-2.mp3');
             audio.play();
         } else {
-            const audio = new Audio('./sound/key.mp3');
+            const audio = new Audio('./sounds/key.mp3');
             audio.play();
         }
     }
 
     onKeyDown(event) {
-        // on firefox in linux search box
-        // pops up on / over keypad
+        // firefox in linux search box pops up on / over keypad
         event.preventDefault();
-        this.playAudio(event.target.dataset.action);
 
         const keyCodes = [
             '+',
@@ -225,7 +223,10 @@ export class Calculator {
             }
         } else if (event.key >= '0' && event.key <= '9') {
             this.number(event.key);
+        } else {
+            return false;
         }
+        this.playAudio(event.key);
         this.updateDisplay();
     }
 
@@ -233,8 +234,8 @@ export class Calculator {
         let action = event.target.dataset.action;
         if (action) {
             this[action](event.target.innerText);
-            this.updateDisplay();
             this.playAudio();
+            this.updateDisplay();
         }
     }
 }
