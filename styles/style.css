@@ -1,40 +1,19 @@
 /* style.css */
 
 @font-face {
-    font-family: 'calc';
-    src: url('../fonts/calculator-webfont.woff2') format('woff2'),
-        url('../fonts/calculator-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'casio';
-    src: url('../fonts/casio-webfont.woff2') format('woff2'),
-        url('../fonts/casio-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'inter';
     src: url('../fonts/inter-variablefont_slntwght-webfont.woff2')
             format('woff2'),
         url('../fonts/inter-variablefont_slntwght-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
-
-@font-face {
-    font-family: 'subjectivity';
-    src: url('../fonts/subjectivity-regular-webfont.woff2') format('woff2'),
-        url('../fonts/subjectivity-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+    font-display: auto;
 }
 
 :root {
+    /* 3.4 */
     --font: 'inter';
+    --font-size: 3.4rem;
 }
 
 html {
@@ -76,9 +55,10 @@ main {
     border: 0.5px solid red;
     text-align: end;
     justify-content: center;
-    font-size: 3rem;
+    font-size: var(--font-size);
     overflow: hidden;
-    padding: 0.4rem;
+    padding: 0.8rem;
+    overflow-wrap: break-word;
 }
 
 button:nth-child(1) {
@@ -95,7 +75,7 @@ button:nth-child(19) {
 
 button {
     font-family: var(--font), sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     border: 1px solid #000000;
     background-color: #fffff4;
     border-radius: 2px;

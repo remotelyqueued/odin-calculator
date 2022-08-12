@@ -27,7 +27,15 @@ todo:
 ✔️ round long answers
 ✔️ string together several operations
 ✔️ keyboard support
+✔️ sound
+✔️ pick a font
+✔️ text overflow
 
--   formatted output (commas)
 -   ui css
--   sound
+-   pick a color scheme
+-   pick a button style
+
+-   ideas - change color on button down
+-   mac keyboard
+-   smoosh button on press
+-   try out webpack
