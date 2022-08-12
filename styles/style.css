@@ -10,9 +10,96 @@
     font-display: auto;
 }
 
+@font-face {
+    font-family: 'patagonia';
+    src: url('../fonts/newpatagonia-regular-webfont.woff2') format('woff2'),
+        url('../fonts/newpatagonia-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: 'cheeched_outline';
+    src: url('../fonts/cheechedoutline-regular-webfont.woff2') format('woff2'),
+        url('../fonts/cheechedoutline-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: 'cheeched';
+    src: url('../fonts/cheeched-regular-webfont.woff2') format('woff2'),
+        url('../fonts/cheeched-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: 'ghost_hands';
+    src: url('../fonts/ghosthands-regular-webfont.woff2') format('woff2'),
+        url('../fonts/ghosthands-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: 'shaky';
+    src: url('../fonts/shakybologna-regular-webfont.woff2') format('woff2'),
+        url('../fonts/shakybologna-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: 'swamp_outlined';
+    src: url('../fonts/swampoutlined-regular-webfont.woff2') format('woff2'),
+        url('../fonts/swampoutlined-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: 'swamp';
+    src: url('../fonts/swamp-regular-webfont.woff2') format('woff2'),
+        url('../fonts/swamp-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: 'thefringe';
+    src: url('../fonts/thefringe-regular-webfont.woff2') format('woff2'),
+        url('../fonts/thefringe-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: auto;
+}
+
+button {
+    font-family: var(--font), sans-serif;
+    font-size: 1.4rem;
+    border: 3px solid #000000;
+    background-color: #fffff4;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: flex-end;
+}
+
+h1 {
+    font-size: 3rem;
+    font-family: 'patagonia';
+}
+
 :root {
     /* 3.4 */
-    --font: 'inter';
+    --font: 'patagonia';
     --font-size: 3.4rem;
 }
 
@@ -22,7 +109,7 @@ html {
 
 body {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column;
     height: 100vh;
     justify-content: center;
     align-items: center;
@@ -37,7 +124,7 @@ main {
     display: grid;
     margin: 0;
     padding: 0;
-    grid-template-rows: 0.5fr 1.5fr 4fr;
+    grid-template-rows: 2fr 4fr;
 }
 
 #keypad {
@@ -54,11 +141,10 @@ main {
 #display {
     border: 0.5px solid red;
     text-align: end;
-    justify-content: center;
     font-size: var(--font-size);
     overflow: hidden;
     padding: 0.8rem;
-    overflow-wrap: break-word;
+    overflow-wrap: break-word;  
 }
 
 button:nth-child(1) {
@@ -71,14 +157,4 @@ button:nth-child(17) {
 
 button:nth-child(19) {
     background-color: #a2ccb6;
-}
-
-button {
-    font-family: var(--font), sans-serif;
-    font-size: 1.6rem;
-    border: 1px solid #000000;
-    background-color: #fffff4;
-    border-radius: 2px;
-    display: inline-flex;
-    align-items: flex-end;
 }

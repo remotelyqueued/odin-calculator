@@ -142,9 +142,7 @@ export class Calculator {
     }
 
     updateDisplay() {
-        // if text gets long shrink font size
-        // length 10 to 2.4
-        // length 14 to 1.8
+        // 20 characters
         if (!this.current.x && !this.current.y) {
             this.display.innerText = '';
         } else if (this.current.y) {
@@ -241,8 +239,6 @@ export class Calculator {
             this.playAudio();
             this.updateDisplay();
             console.assert(this.previous.y === '' || this.previous.y === '=');
-            console.log(this.previous);
-            console.log(this.current);
         }
     }
 }
