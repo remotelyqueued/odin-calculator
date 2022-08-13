@@ -17,6 +17,10 @@ export class Calculator {
         this.display = display;
         this.current = new Data();
         this.previous = new Data();
+
+        this.key = new Audio('./sounds/key.ogg');
+        this.key2 = new Audio('./sounds/key-2.ogg');
+
         elem.onpointerdown = this.onPointerDown.bind(this);
         elem.onkeydown = this.onKeyDown.bind(this);
     }
@@ -188,11 +192,11 @@ export class Calculator {
 
     playAudio(action) {
         if (action === 'equals' || action === 'Enter') {
-            let audio = new Audio('./sounds/key-2.ogg');
-            audio.play();
+            // let audio = new Audio('./sounds/key-2.ogg');
+            this.key2.play();
         } else {
-            let audio = new Audio('./sounds/key.ogg');
-            audio.play();
+            // let audio = new Audio('./sounds/key.ogg');
+            this.key.play();
         }
     }
 

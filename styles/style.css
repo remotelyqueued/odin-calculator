@@ -43,6 +43,20 @@
     /* 00c3fc */
     --dark-green: #364954;
     --pink: #f66e7b;
+
+    /* #99bbff */
+    --light-blue: hsl(220deg 100% 80%);
+    --light-red: #ee2f46;
+    --dark-b: #00c3fc;
+    --light-w: #fffce8;
+    --light-orange: #768bac;
+
+    --background: #99bbff;
+    --equals: #ffdd99;
+    --ac: #ffdd99;
+    --button: #f4f9ff;
+    --display: #f4f9ff;
+    --main: #a5abbd;
 }
 
 html {
@@ -58,7 +72,7 @@ body {
     font-family: var(--font), sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--purple);
+    background-color: var(--background);
 }
 
 h1 {
@@ -78,7 +92,9 @@ main {
     margin: 0;
     padding: 0;
     grid-template-rows: 2fr 4fr;
-    background-color: var(--orange);
+
+    background-color: var(--main);
+
     border-radius: var(--border-radius);
     padding: 4px;
 }
@@ -93,7 +109,7 @@ main {
 
     /* background-color: hsl(100, 9%, 50%); */
     /* background-color: var(--dark-green); */
-    background-color: #7c8b74;
+    background-color: var(--display);
     color: hsl(0, 0%, 11%);
     border-radius: var(--border-radius);
     margin-bottom: 2px;
@@ -110,7 +126,9 @@ button {
     font-family: var(--font), sans-serif;
     font-size: 1.4rem;
     border: 3px solid #000000;
-    background-color: #fffff4;
+
+    background-color: var(--button);
+
     border-radius: var(--border-radius);
     display: inline-flex;
     align-items: flex-end;
@@ -118,7 +136,7 @@ button {
 }
 
 button:nth-child(1) {
-    background-color: var(--pink);
+    background-color: var(--ac);
 }
 
 button:nth-child(17) {
@@ -126,7 +144,7 @@ button:nth-child(17) {
 }
 
 button:nth-child(19) {
-    background-color: var(--dark-blue);
+    background-color: var(--equals);
 }
 
 /* https://stackoverflow.com/questions/9664325/style-the-scrollbar-with-css-in-google-chrome-webkit */
