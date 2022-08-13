@@ -145,12 +145,12 @@ export class Calculator {
         // if x and y don't exist screen should be blank
         if (!this.current.x && !this.current.y) {
             this.display.innerText = '';
-        // if y exists print y first - op and x
+            // if y exists print y first - op and x
         } else if (this.current.y) {
             this.display.innerText = `${this.numberWithCommas(
                 this.current.y
             )} ${this.current.op} ${this.numberWithCommas(this.current.x)}`;
-        // if x exists print x and op if it's there
+            // if x exists print x and op if it's there
         } else if (this.current.x) {
             this.display.innerText = `${this.numberWithCommas(
                 this.current.x
@@ -188,10 +188,10 @@ export class Calculator {
 
     playAudio(action) {
         if (action === 'equals' || action === 'Enter') {
-            const audio = new Audio('./sounds/key-2.mp3');
+            let audio = new Audio('./sounds/key-2.ogg');
             audio.play();
         } else {
-            const audio = new Audio('./sounds/key.mp3');
+            let audio = new Audio('./sounds/key.ogg');
             audio.play();
         }
     }
@@ -251,7 +251,6 @@ export class Calculator {
             this[action](event.target.innerText);
             this.playAudio(action);
             this.updateDisplay();
-            console.assert(this.previous.y === '' || this.previous.y === '=');
         }
     }
 }
