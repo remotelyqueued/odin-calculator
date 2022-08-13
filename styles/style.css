@@ -20,43 +20,17 @@
 }
 
 :root {
-    /* 3.4 */
     --font: 'patagonia';
     --font-size: 3.4rem;
     --border-radius: 8px;
-
-    /* xandu hsl(100, 9%, 50%) */
-    --screen: #7c8b74;
-    --purple: #9999cc;
-    --white: #f5fbf2;
-    --blue: #00bfff;
-    --dark-blue: #0070c9;
-    --black: #15210e;
-    --light-brown: #f6edd9;
-    --off-white: #f6edd9;
-    --orange: #ffd588;
-    --slate: #6b88b2;
-    --yellow: #ffd588;
-    --red: #c06f7a;
-    --bright-green: #68bf48;
-
-    /* 00c3fc */
-    --dark-green: #364954;
-    --pink: #f66e7b;
-
-    /* #99bbff */
-    --light-blue: hsl(220deg 100% 80%);
-    --light-red: #ee2f46;
-    --dark-b: #00c3fc;
-    --light-w: #fffce8;
-    --light-orange: #768bac;
-
-    --background: #99bbff;
+    --background: #d0d1df;
     --equals: #ffdd99;
-    --ac: #ffdd99;
-    --button: #f4f9ff;
+    --ac: #5271bf;
+    --button: #1a1a1a;
     --display: #f4f9ff;
-    --main: #a5abbd;
+    --main: #1a1a1a;
+    --border-main: 4px solid #000000;
+    --border-buttons: 2px solid #000000;
 }
 
 html {
@@ -64,15 +38,15 @@ html {
 }
 
 body {
+    font-family: var(--font), sans-serif;
+    background-color: var(--background);
     display: flex;
     flex-flow: column;
     height: 100vh;
     justify-content: center;
     align-items: center;
-    font-family: var(--font), sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--background);
 }
 
 h1 {
@@ -85,58 +59,82 @@ h1 {
 }
 
 main {
-    border: 4px solid black;
+    /* border: var(--border-main);
+    background-color: var(--main);
+    border-radius: var(--border-radius); */
+
     width: 360px;
     height: 600px;
     display: grid;
     margin: 0;
-    padding: 0;
     grid-template-rows: 2fr 4fr;
 
-    background-color: var(--main);
-
-    border-radius: var(--border-radius);
     padding: 4px;
+
+    background: #1a1a1a;
+    border-color: rgb(68, 68, 68);
+
+    border-style: solid;
+    /* border-width: 2px 2px 2px; */
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+        0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+        0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+    border-width: 8px;
+    border-radius: 16px;
+    flex-shrink: 0;
 }
 
 #display {
-    border: 4px solid var(--black);
-    text-align: end;
+    border: var(--border-main);
+    background-color: var(--display);
+    border-radius: 8px;
     font-size: var(--font-size);
+
     overflow-y: scroll;
     padding: 0.8rem;
     overflow-wrap: break-word;
+    text-align: end;
 
-    /* background-color: hsl(100, 9%, 50%); */
-    /* background-color: var(--dark-green); */
-    background-color: var(--display);
+    margin-bottom: 6px;
     color: hsl(0, 0%, 11%);
-    border-radius: var(--border-radius);
-    margin-bottom: 2px;
+
+    background: #ede8e5;
+    border-color: #e0dcd8 #d1ceca #bdb8b8;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 4px 4px 6px;
 }
 
 #keypad {
+    border-radius: 8px;
+
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1px;
-    border-radius: var(--border-radius);
+    gap: 5px;
 }
 
 button {
-    font-family: var(--font), sans-serif;
     font-size: 1.4rem;
-    border: 3px solid #000000;
-
-    background-color: var(--button);
-
-    border-radius: var(--border-radius);
     display: inline-flex;
     align-items: flex-end;
     user-select: none;
+    font-family: var(--font), sans-serif;
+
+    background: #ede8e5;
+    border-color: #e0dcd8 #d1ceca #bdb8b8;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 5px 9px 12px;
+}
+
+button:active {
+    transform: translateY(2px);
 }
 
 button:nth-child(1) {
-    background-color: var(--ac);
+    /* background-color: var(--ac); */
+    background: #e64848;
+    border-color: #cf4141 #b83a3a #a13232;
 }
 
 button:nth-child(17) {
@@ -144,7 +142,9 @@ button:nth-child(17) {
 }
 
 button:nth-child(19) {
-    background-color: var(--equals);
+    /* background-color: var(--equals); */
+    background: #5271bf;
+    border-color: #5b78c2 #324b88 #273a6b;
 }
 
 /* https://stackoverflow.com/questions/9664325/style-the-scrollbar-with-css-in-google-chrome-webkit */
