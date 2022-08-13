@@ -87,14 +87,20 @@ button {
     font-size: 1.4rem;
     border: 3px solid #000000;
     background-color: #fffff4;
+    /* background-color: white; */
     border-radius: var(--border-radius);
     display: inline-flex;
     align-items: flex-end;
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 4rem;
     font-family: var(--font);
+    color: white;
+    -webkit-text-stroke: 1px black;
+    color: white;
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 :root {
@@ -102,6 +108,26 @@ h1 {
     --font: 'patagonia';
     --font-size: 3.4rem;
     --border-radius: 8px;
+
+    /* xandu hsl(100, 9%, 50%) */
+    --purple: #9999cc;
+    --white: #f5fbf2;
+    --blue: #00bfff;
+    --dark-blue: #0070c9;
+    --black: #15210e;
+    --light-brown: #f6edd9;
+    --off-white: #f6edd9;
+    --orange: #ffd588;
+    --slate: #6b88b2;
+    --yellow: #ffd588;
+    --red: #c06f7a;
+    --bright-green: #68bf48;
+
+    /* 00c3fc */
+    --dark-green: #364954;
+    --pink: #f66e7b;
+
+
 }
 
 html {
@@ -117,15 +143,20 @@ body {
     font-family: var(--font), sans-serif;
     margin: 0;
     padding: 0;
+    background-color: var(--purple);
 }
 
 main {
+    border: 4px dashed black;
     width: 360px;
     height: 600px;
     display: grid;
     margin: 0;
     padding: 0;
     grid-template-rows: 2fr 4fr;
+    background-color: var(--black);
+    border-radius: var(--border-radius);
+    padding: 8px;
 }
 
 #keypad {
@@ -136,21 +167,22 @@ main {
 }
 
 #display {
-    border: 3px solid black;
+    border: 4px solid var(--black);
     text-align: end;
     font-size: var(--font-size);
     overflow-y: scroll;
     padding: 0.8rem;
     overflow-wrap: break-word;
 
-    background-color: hsl(100, 9%, 50%);
-    color: hsl(0, 0%, 21%);
+    /* background-color: hsl(100, 9%, 50%); */
+    /* background-color: var(--dark-green); */
+    color: hsl(0, 0%, 11%);
     border-radius: var(--border-radius);
     margin-bottom: 2px;
 }
 
 button:nth-child(1) {
-    background-color: #ee786e;
+    background-color: var(--pink);
 }
 
 button:nth-child(17) {
@@ -158,7 +190,7 @@ button:nth-child(17) {
 }
 
 button:nth-child(19) {
-    background-color: #a2ccb6;
+    background-color: var(--dark-blue);
 }
 
 /* https://stackoverflow.com/questions/9664325/style-the-scrollbar-with-css-in-google-chrome-webkit */
