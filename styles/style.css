@@ -19,90 +19,6 @@
     font-display: auto;
 }
 
-@font-face {
-    font-family: 'cheeched_outline';
-    src: url('../fonts/cheechedoutline-regular-webfont.woff2') format('woff2'),
-        url('../fonts/cheechedoutline-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: auto;
-}
-
-@font-face {
-    font-family: 'cheeched';
-    src: url('../fonts/cheeched-regular-webfont.woff2') format('woff2'),
-        url('../fonts/cheeched-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: auto;
-}
-
-@font-face {
-    font-family: 'ghost_hands';
-    src: url('../fonts/ghosthands-regular-webfont.woff2') format('woff2'),
-        url('../fonts/ghosthands-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: auto;
-}
-
-@font-face {
-    font-family: 'shaky';
-    src: url('../fonts/shakybologna-regular-webfont.woff2') format('woff2'),
-        url('../fonts/shakybologna-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: auto;
-}
-
-@font-face {
-    font-family: 'swamp_outlined';
-    src: url('../fonts/swampoutlined-regular-webfont.woff2') format('woff2'),
-        url('../fonts/swampoutlined-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: auto;
-}
-
-@font-face {
-    font-family: 'swamp';
-    src: url('../fonts/swamp-regular-webfont.woff2') format('woff2'),
-        url('../fonts/swamp-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: auto;
-}
-
-@font-face {
-    font-family: 'thefringe';
-    src: url('../fonts/thefringe-regular-webfont.woff2') format('woff2'),
-        url('../fonts/thefringe-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: auto;
-}
-
-button {
-    font-family: var(--font), sans-serif;
-    font-size: 1.4rem;
-    border: 3px solid #000000;
-    background-color: #fffff4;
-    /* background-color: white; */
-    border-radius: var(--border-radius);
-    display: inline-flex;
-    align-items: flex-end;
-}
-
-h1 {
-    font-size: 4rem;
-    font-family: var(--font);
-    color: white;
-    -webkit-text-stroke: 1px black;
-    color: white;
-    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
-        -1px 1px 0 #000, 1px 1px 0 #000;
-}
-
 :root {
     /* 3.4 */
     --font: 'patagonia';
@@ -110,6 +26,7 @@ h1 {
     --border-radius: 8px;
 
     /* xandu hsl(100, 9%, 50%) */
+    --screen: #7c8b74;
     --purple: #9999cc;
     --white: #f5fbf2;
     --blue: #00bfff;
@@ -126,8 +43,6 @@ h1 {
     /* 00c3fc */
     --dark-green: #364954;
     --pink: #f66e7b;
-
-
 }
 
 html {
@@ -146,6 +61,16 @@ body {
     background-color: var(--purple);
 }
 
+h1 {
+    font-size: 4rem;
+    font-family: var(--font);
+    color: white;
+    -webkit-text-stroke: 1px black;
+    color: white;
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+        -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
 main {
     border: 4px dashed black;
     width: 360px;
@@ -156,14 +81,7 @@ main {
     grid-template-rows: 2fr 4fr;
     background-color: var(--black);
     border-radius: var(--border-radius);
-    padding: 8px;
-}
-
-#keypad {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1px;
-    border-radius: var(--border-radius);
+    padding: 4px;
 }
 
 #display {
@@ -176,9 +94,28 @@ main {
 
     /* background-color: hsl(100, 9%, 50%); */
     /* background-color: var(--dark-green); */
+    background-color: #7c8b74;
     color: hsl(0, 0%, 11%);
     border-radius: var(--border-radius);
     margin-bottom: 2px;
+}
+
+#keypad {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    border-radius: var(--border-radius);
+}
+
+button {
+    font-family: var(--font), sans-serif;
+    font-size: 1.4rem;
+    border: 3px solid #000000;
+    background-color: #fffff4;
+    /* background-color: white; */
+    border-radius: var(--border-radius);
+    display: inline-flex;
+    align-items: flex-end;
 }
 
 button:nth-child(1) {

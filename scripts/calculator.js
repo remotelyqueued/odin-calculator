@@ -146,7 +146,6 @@ export class Calculator {
         if (!this.current.x && !this.current.y) {
             this.display.innerText = '';
         // if y exists print y first - op and x
-        // if op and x don't exist doesn't matter
         } else if (this.current.y) {
             this.display.innerText = `${this.numberWithCommas(
                 this.current.y
