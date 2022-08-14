@@ -18,9 +18,10 @@ export class Calculator {
         this.current = new Data();
         this.previous = new Data();
 
+        // issues with audio: firefox windows 11
+        // this resolved them
         this.key1 = document.getElementById('key1');
         this.key2 = document.getElementById('key2');
-
         this.morty = document.getElementById('morty');
 
         elem.onpointerdown = this.onPointerDown.bind(this);
@@ -93,8 +94,7 @@ export class Calculator {
         if (isNaN(parseFloat(this.current.x))) return;
         // divion by 0
         if (parseFloat(this.current.x) === 0 && this.current.op === '÷') {
-            this.key2.pause();
-            this.current.x = 'Belllurrrr';
+            this.current.x = 'Bruh';
             this.morty.currentTime = 0;
             this.morty.play();
             // handles "lol" in current (chaining resets)

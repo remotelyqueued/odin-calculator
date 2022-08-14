@@ -18,28 +18,8 @@
     font-display: auto;
 }
 
-:root {
-    --font: 'patagonia';
-
-    --font-size: 3.4rem;
-    --border-radius: 8px;
-    --background: #d0d1df;
-    --equals: #ffdd99;
-    --ac: #5271bf;
-    --button: #1a1a1a;
-    --display: #f4f9ff;
-    --main: #1a1a1a;
-    --border-main: 4px solid #000000;
-    --border-buttons: 2px solid #000000;
-}
-
-html {
-    font-family: var(--font), sans-serif;
-}
-
 body {
-    font-family: var(--font), sans-serif;
-    background-color: var(--background);
+    background-color: #d0d1df;
     display: flex;
     flex-flow: column;
     height: 100vh;
@@ -50,70 +30,55 @@ body {
 }
 
 main {
-    /* border: var(--border-main);
-    background-color: var(--main);
-    border-radius: var(--border-radius); */
-
     width: 360px;
     height: 600px;
     display: grid;
-    margin: 0;
-    grid-template-rows: 2fr 4fr;
-
+    flex-shrink: 0;
+    grid-template-rows: 1fr 2fr;
     padding: 4px;
 
     background: #1a1a1a;
-    border-color: rgb(68, 68, 68);
-
+    border-color: #444444;
     border-style: solid;
-    /* border-width: 2px 2px 2px; */
+    border-width: 8px;
+    border-radius: 16px;
+
+    /* https://www.joshwcomeau.com/css/designing-shadows/ */
     box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
         0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
         0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
-    border-width: 8px;
-    border-radius: 16px;
-    flex-shrink: 0;
 }
 
 #display {
     font-family: 'roboto';
-
-    border: var(--border-main);
-    background-color: var(--display);
-    border-radius: 8px;
-    font-size: var(--font-size);
+    font-size: 3.2rem;
     overflow-y: scroll;
     padding: 0.8rem;
     overflow-wrap: break-word;
     text-align: end;
-
     margin-bottom: 6px;
-    /* color: hsl(0, 0%, 11%); */
-    color: rgb(46, 46, 46);
-
-    font-weight: 500;
+    color: #444444;
+    font-weight: 900;
     background: #ede8e5;
     border-color: #e0dcd8 #d1ceca #bdb8b8;
     border-radius: 8px;
     border-style: solid;
-    border-width: 4px 4px 6px;
+    border-width: 4px 4px 4px;
 }
 
 #keypad {
     border-radius: 8px;
-
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 5px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 button {
+    font-family: 'patagonia';
     font-size: 1.4rem;
     display: inline-flex;
     align-items: flex-end;
     user-select: none;
-    font-family: var(--font), sans-serif;
-
     background: #ede8e5;
     border-color: #e0dcd8 #d1ceca #bdb8b8;
     border-radius: 4px;
@@ -126,7 +91,6 @@ button:active {
 }
 
 button:nth-child(1) {
-    /* background-color: var(--ac); */
     background: #e64848;
     border-color: #cf4141 #b83a3a #a13232;
 }
@@ -136,7 +100,6 @@ button:nth-child(17) {
 }
 
 button:nth-child(19) {
-    /* background-color: var(--equals); */
     background: #5271bf;
     border-color: #5b78c2 #324b88 #273a6b;
 }
