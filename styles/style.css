@@ -38,6 +38,7 @@ main {
     padding: 4px;
 
     background: #1a1a1a;
+    
     border-color: #444444;
     border-style: solid;
     border-width: 8px;
@@ -52,14 +53,19 @@ main {
 #display {
     font-family: 'roboto';
     font-size: 3.2rem;
+    font-weight: 900;
+
     overflow-y: scroll;
-    padding: 0.8rem;
     overflow-wrap: break-word;
+
+    padding: 0.8rem;
+    
     text-align: end;
     margin-bottom: 6px;
+
     color: #444444;
-    font-weight: 900;
     background: #ede8e5;
+
     border-color: #e0dcd8 #d1ceca #bdb8b8;
     border-radius: 8px;
     border-style: solid;
@@ -76,10 +82,13 @@ main {
 button {
     font-family: 'patagonia';
     font-size: 1.4rem;
+
     display: inline-flex;
     align-items: flex-end;
-    user-select: none;
+
+    user-select: none; 
     background: #ede8e5;
+
     border-color: #e0dcd8 #d1ceca #bdb8b8;
     border-radius: 4px;
     border-style: solid;
@@ -87,6 +96,10 @@ button {
 }
 
 button:active {
+    transform: translateY(3px);
+}
+
+.active {
     transform: translateY(3px);
 }
 

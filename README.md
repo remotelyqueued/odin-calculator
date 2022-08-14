@@ -1,12 +1,12 @@
 # odin-calculator
 
-I guess the goal here is to get the calculator to operate gracefully
+I guess the goal for me here was to get the calculator to operate gracefully
 
 not all user errors produce unusable results or reset the calculation
 
-tried to catch most basic errors
+tried to catch most common errors
 
-todo:  
+todo:
 
 ✔️ add  
 ✔️ subtract  
@@ -30,5 +30,7 @@ todo:
 ✔️ text overflow (scroll)  
 ✔️ pick a color scheme  
 ✔️ pick a button style  
-✔️ ui css  
+✔️ ui css
+
 -   try out webpack
+-   simulate key down on keypress

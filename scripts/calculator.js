@@ -250,6 +250,14 @@ export class Calculator {
         } else {
             return false;
         }
+        // needs work
+        // some of the buttons innertext is not = to event.key
+        this.elem.querySelectorAll('button').forEach(button => {
+            if (button.innerText === event.key)
+                button.classList.toggle('active');
+        });
+
+        console.log(event.key);
         this.playAudio(event.key);
         this.updateDisplay();
     }
