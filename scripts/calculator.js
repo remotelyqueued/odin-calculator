@@ -21,6 +21,8 @@ export class Calculator {
         this.key1 = document.getElementById('key1');
         this.key2 = document.getElementById('key2');
 
+        this.morty = document.getElementById('morty');
+
         elem.onpointerdown = this.onPointerDown.bind(this);
         elem.onkeydown = this.onKeyDown.bind(this);
     }
@@ -91,7 +93,10 @@ export class Calculator {
         if (isNaN(parseFloat(this.current.x))) return;
         // divion by 0
         if (parseFloat(this.current.x) === 0 && this.current.op === '÷') {
-            this.current.x = 'lol';
+            this.key2.pause();
+            this.current.x = 'Belllurrrr';
+            this.morty.currentTime = 0;
+            this.morty.play();
             // handles "lol" in current (chaining resets)
             this.previous = new Data();
         } else {
