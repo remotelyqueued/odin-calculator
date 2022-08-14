@@ -4,9 +4,7 @@ I guess the goal for me here was to get the calculator to operate gracefully
 
 not all user errors produce unusable results or reset the calculation
 
-tried to catch most common errors
-
-todo:
+support for:
 
 ✔️ add  
 ✔️ subtract  
@@ -24,13 +22,15 @@ todo:
 ✔️ string together several operations  
 ✔️ keyboard support  
 ✔️ sound  
-✔️ pick a font  
 ✔️ text overflow (break)  
 ✔️ formatted text (commas)  
 ✔️ text overflow (scroll)  
-✔️ pick a color scheme  
-✔️ pick a button style  
-✔️ ui css
+✔️ ui design
+
+todo:
 
 -   try out webpack
--   simulate key down on keypress
+-   simulate key down on keypress (active)
+-   issue with audio windows 11 firefox
+-   issue with audio key2
+-   different pop culture reference

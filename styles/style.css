@@ -38,7 +38,7 @@ main {
     padding: 4px;
 
     background: #1a1a1a;
-    
+
     border-color: #444444;
     border-style: solid;
     border-width: 8px;
@@ -59,7 +59,7 @@ main {
     overflow-wrap: break-word;
 
     padding: 0.8rem;
-    
+
     text-align: end;
     margin-bottom: 6px;
 
@@ -86,7 +86,7 @@ button {
     display: inline-flex;
     align-items: flex-end;
 
-    user-select: none; 
+    user-select: none;
     background: #ede8e5;
 
     border-color: #e0dcd8 #d1ceca #bdb8b8;
@@ -99,6 +99,7 @@ button:active {
     transform: translateY(3px);
 }
 
+/* space bar makes button active, unsure how to emulate that on keypress */
 .active {
     transform: translateY(3px);
 }

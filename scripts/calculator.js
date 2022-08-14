@@ -19,7 +19,6 @@ export class Calculator {
         this.previous = new Data();
 
         // issues with audio: firefox windows 11
-        // this resolved them
         this.key1 = document.getElementById('key1');
         this.key2 = document.getElementById('key2');
         this.morty = document.getElementById('morty');
@@ -29,7 +28,7 @@ export class Calculator {
     }
 
     number(innerText) {
-        // handles "lol" in current and 3 + . resetting
+        // handles text in current after dividing by 0 and 3 + . resetting
         if (!isFinite(this.current.x) && this.current.x !== '.') {
             this.current.x = innerText;
         } else {
@@ -97,7 +96,7 @@ export class Calculator {
             this.current.x = 'Bruh';
             this.morty.currentTime = 0;
             this.morty.play();
-            // handles "lol" in current (chaining resets)
+            // handles division by 0 text in current ending up in previous
             this.previous = new Data();
         } else {
             this.current.x = `${this.operate(
@@ -168,8 +167,8 @@ export class Calculator {
     }
 
     // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
-    // handles long decimals without inserting commas on the right side
-    // note: learn regex lol
+    // handles long decimals without inserting commas in decimal places
+    // note to self: learn regex lol
     numberWithCommas(x) {
         return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
     }
@@ -206,9 +205,8 @@ export class Calculator {
     }
 
     onKeyDown(event) {
-        // firefox in linux search box pops up on / over keypad
+        // firefox in linux search box pops up on when pressing / over keypad
         event.preventDefault();
-
         const keyCodes = [
             '+',
             '-',
@@ -250,14 +248,13 @@ export class Calculator {
         } else {
             return false;
         }
-        // needs work
+        // todo:
+        // make button active on keypress? works with spacebar
         // some of the buttons innertext is not = to event.key
         this.elem.querySelectorAll('button').forEach(button => {
             if (button.innerText === event.key)
                 button.classList.toggle('active');
         });
-
-        console.log(event.key);
         this.playAudio(event.key);
         this.updateDisplay();
     }
