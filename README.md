@@ -31,6 +31,5 @@ todo:
 
 -   try out webpack
 -   simulate key down on keypress (active)
--   issue with audio windows 11 firefox
 -   issue with audio key2
 -   different pop culture reference

@@ -249,12 +249,14 @@ export class Calculator {
             return false;
         }
         // todo:
-        // make button active on keypress? works with spacebar
         // some of the buttons innertext is not = to event.key
         // this.elem.querySelectorAll('button').forEach(button => {
         //     if (button.innerText === event.key)
         //         button.classList.toggle('active');
         // });
+
+        // okKeyDown: add class
+        // todo: bind onKeyUp - remove/swap class
         this.playAudio(event.key);
         this.updateDisplay();
     }
