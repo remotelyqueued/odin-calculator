@@ -23,8 +23,11 @@ export class Calculator {
         this.key2 = document.getElementById('key2');
         this.morty = document.getElementById('morty');
 
+        this.activeKey = '';
+
         elem.onpointerdown = this.onPointerDown.bind(this);
         elem.onkeydown = this.onKeyDown.bind(this);
+        elem.onkeyup = this.onKeyUp.bind(this);
     }
 
     number(innerText) {
@@ -224,41 +227,56 @@ export class Calculator {
                 case '+':
                 case '-':
                     this.operator(event.key);
+                    this.activeKey = event.key;
                     break;
                 case 'x':
                 case '*':
                     this.operator('x');
+                    this.activeKey = 'x';
                     break;
                 case '/':
                     this.operator('÷');
+                    this.activeKey = '÷';
                     break;
                 case '=':
                 case 'Enter':
                     this.equals('=');
+                    this.activeKey = '=';
                     break;
                 case 'Backspace':
                     this.back();
+                    this.activeKey = '←';
                     break;
                 case '.':
                     this.decimal();
+                    this.activeKey = '.';
                     break;
             }
         } else if (event.key >= '0' && event.key <= '9') {
             this.number(event.key);
+            this.activeKey = event.key;
         } else {
             return false;
         }
-        // todo:
-        // some of the buttons innertext is not = to event.key
-        // this.elem.querySelectorAll('button').forEach(button => {
-        //     if (button.innerText === event.key)
-        //         button.classList.toggle('active');
-        // });
-
-        // okKeyDown: add class
-        // todo: bind onKeyUp - remove/swap class
-        this.playAudio(event.key);
+        // some of the buttons innertext is not === to event.key
+        this.elem.querySelectorAll('button').forEach(button => {
+            if (button.innerText === this.activeKey && !event.repeat) {
+                button.classList.add('active');
+                // handles holding down a key
+                this.playAudio(event.key);
+            }
+        });
         this.updateDisplay();
+    }
+
+    onKeyUp(event) {
+        // event.target && event.currentTarget === body in most cases
+        // couldn't figure out an easier way to do this
+        // if you press a bunch of keys at once eventually some of the keys
+        // get stuck in the down position this handles that
+        this.elem.querySelectorAll('.active').forEach(button => {
+            button.classList.remove('active');
+        });
     }
 
     onPointerDown(event) {

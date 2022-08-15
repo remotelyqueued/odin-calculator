@@ -25,11 +25,11 @@ support for:
 ✔️ text overflow (break)  
 ✔️ formatted text (commas)  
 ✔️ text overflow (scroll)  
-✔️ ui design
+✔️ ui design  
+✔️ simulate key down on keypress (active)  
 
 todo:
 
 -   try out webpack
--   simulate key down on keypress (active)
 -   issue with audio key2
 -   different pop culture reference

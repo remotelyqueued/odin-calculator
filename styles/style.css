@@ -99,7 +99,6 @@ button:active {
     transform: translateY(3px);
 }
 
-/* space bar makes button active, unsure how to emulate that on keypress */
 .active {
     transform: translateY(3px);
 }
