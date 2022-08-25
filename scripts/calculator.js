@@ -172,8 +172,14 @@ export class Calculator {
     // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
     // handles long decimals without inserting commas in decimal places
     // note to self: learn regex lol
+
+    // Safari does not have lookbehind support as of current
+    // https://caniuse.com/?search=lookbehind
     numberWithCommas(x) {
-        return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+        // return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+        let parts = x.toString().split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return parts.join('.');
     }
 
     operate(operator, num1, num2) {
